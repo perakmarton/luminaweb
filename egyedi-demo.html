@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus ERP - Vállalatirányítási Rendszer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg: #0b0f19; --panel: #151e2f; --panel-border: rgba(255,255,255,0.05);
+            --primary: #6366f1; --primary-hover: #4f46e5;
+            --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
+            --text-main: #f8fafc; --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Oldalsáv */
+        .sidebar { width: 260px; background: var(--panel); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; z-index: 10;}
+        .logo-area { padding: 24px; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--panel-border); margin-bottom: 20px; }
+        .logo-area span { color: var(--primary); }
+        .nav-menu { padding: 0 15px; flex: 1; }
+        .nav-item { padding: 12px 15px; margin-bottom: 5px; border-radius: 8px; color: var(--text-muted); font-weight: 500; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 12px; }
+        .nav-item:hover, .nav-item.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+        
+        /* Fő tartalom & Topbar */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .topbar { height: 80px; padding: 0 40px; border-bottom: 1px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center; }
+        .search-bar input { background: rgba(0,0,0,0.2); border: 1px solid var(--panel-border); padding: 12px 20px; border-radius: 20px; color: white; width: 350px; outline: none; transition: 0.3s; }
+        .search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
+        .user-profile { display: flex; align-items: center; gap: 15px; cursor: pointer;}
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #a855f7); display: flex; justify-content: center; align-items: center; font-weight: bold; }
+
+        .dashboard-scroll { padding: 40px; overflow-y: auto; height: calc(100vh - 80px); }
+        
+        /* Nézetek kezelése (SPA illúzió) */
+        .view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
+        .view-section.active { display: block; opacity: 1; }
+
+        /* Widgetek */
+        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 24px; }
+        .widget { background: var(--panel); border: 1px solid var(--panel-border); border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .widget-header { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+        .widget-value { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
+        
+        .chart-container { display: flex; align-items: flex-end; gap: 10px; height: 80px; margin-top: 20px; }
+        .bar { flex: 1; background: var(--primary); border-radius: 4px 4px 0 0; opacity: 0.8; transition: 0.3s; position: relative; cursor: pointer;}
+        .bar:hover { opacity: 1; transform: scaleY(1.05); }
+
+        /* Gombok és Badge-ek */
+        .btn-action { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; gap: 8px; align-items: center; }
+        .btn-action:hover { background: var(--primary-hover); }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: rgba(99, 102, 241, 0.1); }
+        .badge { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .badge.pending { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        .badge.success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .badge.danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+        /* Táblázat */
+        .table-widget { background: var(--panel); border: 1px solid var(--panel-border); border-radius: 16px; padding: 24px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--panel-border); }
+        th { color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* Egyedi elemek (Toggle, Progress) */
+        .progress-bg { width: 100%; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .progress-bar { height: 100%; border-radius: 4px; }
+        
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.1); transition: .4s; border-radius: 34px; border: 1px solid var(--panel-border);}
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: var(--text-muted); transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: rgba(99, 102, 241, 0.2); border-color: var(--primary);}
+        input:checked + .slider:before { transform: translateX(24px); background-color: var(--primary); }
+
+        /* Értesítés */
+        .toast { position: fixed; bottom: 30px; right: 30px; background: white; color: #0f172a; padding: 15px 25px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transform: translateY(100px); opacity: 0; transition: 0.4s; display: flex; align-items: center; gap: 10px; z-index: 1000;}
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast-icon { background: var(--success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            Nexus<span>ERP</span>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="switchView(this, 'view-dashboard')">📊 Analitika & Dashboard</div>
+            <div class="nav-item" onclick="switchView(this, 'view-projects')">📁 Projektmenedzsment</div>
+            <div class="nav-item" onclick="switchView(this, 'view-crm')">👥 Ügyfél Adatbázis (CRM)</div>
+            <div class="nav-item" onclick="switchView(this, 'view-finance')">💰 Pénzügy & Számlázás</div>
+            <div class="nav-item" onclick="switchView(this, 'view-settings')">⚙️ Rendszerbeállítások</div>
+        </div>
+        <div style="padding: 20px; border-top: 1px solid var(--panel-border); font-size: 0.8rem; color: var(--text-muted);">
+            Szerver állapot: <span style="color: var(--success);">● Online</span><br>
+            Verzió: 2.4.1 (API Élő)
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Globális keresés a rendszerben...">
+            </div>
+            <div class="user-profile">
+                <span style="font-size: 0.9rem; font-weight: 500;">Adminisztrátor</span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+        <div class="dashboard-scroll">
+            
+            <div id="view-dashboard" class="view-section active">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Üzleti Áttekintés</h1>
+                        <p style="color: var(--text-muted);">Valós idejű adatok és API szinkronizáció.</p>
+                    </div>
+                    <button class="btn-action" onclick="showToast('Adatok letöltése megkezdődött...')">Jelentés Exportálása</button>
+                </div>
+
+                <div class="widget-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="widget">
+                        <div class="widget-header">Aktív Felhasználók<span class="badge success">+12%</span></div>
+                        <div class="widget-value">2,845</div>
+                        <div class="progress-bg"><div class="progress-bar" style="width: 85%; background: var(--primary);"></div></div>
+                    </div>
+                    <div class="widget" style="grid-column: span 2;">
+                        <div class="widget-header">Szerver Terhelés és API Hívások</div>
+                        <div class="chart-container">
+                            <div class="bar" style="height: 40%;"></div>
+                            <div class="bar" style="height: 65%;"></div>
+                            <div class="bar" style="height: 50%;"></div>
+                            <div class="bar" style="height: 90%; background: var(--warning);"></div>
+                            <div class="bar" style="height: 70%;"></div>
+                            <div class="bar" style="height: 45%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-projects" class="view-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Projektmenedzsment</h1>
+                        <p style="color: var(--text-muted);">Folyamatban lévő fejlesztések és feladatok.</p>
+                    </div>
+                    <button class="btn-action btn-outline" onclick="showToast('Új projekt tábla létrehozva!')">+ Új Projekt</button>
+                </div>
+                <div class="widget-grid">
+                    <div class="widget">
+                        <div class="widget-header">Webshop Újraírása <span class="badge pending">Folyamatban</span></div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Frontend átállítása React-re, kosár optimalizálása.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;"><span>Állapot:</span><span>75%</span></div>
+                        <div class="progress-bg"><div class="progress-bar" style="width: 75%; background: var(--primary);"></div></div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header">CRM API Integráció <span class="badge danger">Késésben</span></div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Számlázz.hu végpontok bekötése a Sales funnelbe.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;"><span>Állapot:</span><span>30%</span></div>
+                        <div class="progress-bg"><div class="progress-bar" style="width: 30%; background: var(--danger);"></div></div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header">Téli Kampány Landing <span class="badge success">Kész</span></div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Design elfogadva, kódolás befejezve, A/B teszt indul.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;"><span>Állapot:</span><span>100%</span></div>
+                        <div class="progress-bg"><div class="progress-bar" style="width: 100%; background: var(--success);"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-crm" class="view-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Ügyfél Adatbázis (CRM)</h1>
+                        <p style="color: var(--text-muted);">Kiemelt ügyfelek és kapcsolattartók kezelése.</p>
+                    </div>
+                    <button class="btn-action">+ Ügyfél Rögzítése</button>
+                </div>
+                <div class="table-widget">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ügyfél Név</th>
+                                <th>Kapcsolattartó</th>
+                                <th>Email</th>
+                                <th>Státusz</th>
+                                <th>Művelet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Innovációs Központ Zrt.</td>
+                                <td>Kiss Péter</td>
+                                <td>peter.kiss@innov.hu</td>
+                                <td><span class="badge success">VIP Ügyfél</span></td>
+                                <td><button class="btn-outline" style="padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">Adatlap</button></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Szabó és Társa Kft.</td>
+                                <td>Szabó Anna</td>
+                                <td>anna@szabokft.hu</td>
+                                <td><span class="badge pending">Tárgyalás alatt</span></td>
+                                <td><button class="btn-outline" style="padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">Adatlap</button></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Global Logistics Corp.</td>
+                                <td>Nagy Gábor</td>
+                                <td>info@global-log.com</td>
+                                <td><span class="badge success">Aktív</span></td>
+                                <td><button class="btn-outline" style="padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">Adatlap</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-finance" class="view-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Pénzügy & Számlázás</h1>
+                        <p style="color: var(--text-muted);">Kimenő számlák és kintlévőségek kezelése.</p>
+                    </div>
+                </div>
+                <div class="widget-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="widget">
+                        <div class="widget-header">Kintlévőség (Fizetetlen számlák)</div>
+                        <div class="widget-value" style="color: var(--danger);">1,450,000 Ft</div>
+                        <button class="btn-outline" style="width: 100%; padding: 10px; border-radius: 6px; margin-top: 10px;" onclick="showToast('Fizetési emlékeztetők kiküldve!')">Automata Emlékeztetők Küldése</button>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header">Havi Teljesített Bevétel</div>
+                        <div class="widget-value" style="color: var(--success);">8,200,000 Ft</div>
+                    </div>
+                </div>
+                <div class="table-widget">
+                    <h2 style="font-size: 1.1rem; margin-bottom: 15px;">Legutóbbi Számlák</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Számlaszám</th>
+                                <th>Ügyfél</th>
+                                <th>Összeg</th>
+                                <th>Határidő</th>
+                                <th>Státusz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#SZ-2026-001</td>
+                                <td>Innovációs Központ Zrt.</td>
+                                <td>450,000 Ft</td>
+                                <td>2026. Május 10.</td>
+                                <td><span class="badge success">Kifizetve</span></td>
+                            </tr>
+                            <tr>
+                                <td>#SZ-2026-002</td>
+                                <td>Szabó és Társa Kft.</td>
+                                <td>120,000 Ft</td>
+                                <td style="color: var(--danger);">2026. Április 28.</td>
+                                <td><span class="badge danger">Lejárt</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-settings" class="view-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Rendszerbeállítások</h1>
+                        <p style="color: var(--text-muted);">Biztonsági és értesítési konfigurációk.</p>
+                    </div>
+                    <button class="btn-action" onclick="showToast('Beállítások sikeresen mentve!')">Módosítások Mentése</button>
+                </div>
+                <div class="widget-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="table-widget">
+                        <h2 style="font-size: 1.2rem; margin-bottom: 20px;">Email Értesítések</h2>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--panel-border); padding-bottom: 15px;">
+                            <div>
+                                <h4 style="margin-bottom: 5px;">Új Regisztráció</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Értesítés küldése új ügyfél fiók létrehozásakor.</p>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div>
+                                <h4 style="margin-bottom: 5px;">Sikertelen API Hívások</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Azonnali riasztás, ha egy rendszerintegráció leáll.</p>
+                            </div>
+                            <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    
+                    <div class="table-widget">
+                        <h2 style="font-size: 1.2rem; margin-bottom: 20px;">Biztonság (2FA)</h2>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">A Kétlépcsős Azonosítás (2FA) kötelezővé tétele minden adminisztrátor számára.</p>
+                        <div style="display: flex; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid var(--panel-border);">
+                            <span style="font-weight: bold; color: var(--danger);">Kétlépcsős azonosítás állapota</span>
+                            <label class="toggle-switch"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="toast" id="toastMsg">
+        <div class="toast-icon">✓</div>
+        <span id="toastText">Művelet sikeres!</span>
+    </div>
+
+    <script>
+        // --- SPA ILLÚZIÓ (Nézetek váltása) ---
+        function switchView(navElement, targetViewId) {
+            // 1. Gombok aktív állapotának cseréje
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            navElement.classList.add('active');
+
+            // 2. Minden nézet elrejtése animálva
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(view => {
+                view.style.opacity = '0';
+                setTimeout(() => {
+                    view.style.display = 'none';
+                    view.classList.remove('active');
+                }, 300); // Várjuk meg, amíg elhalványul
+            });
+
+            // 3. Új nézet megjelenítése animálva
+            setTimeout(() => {
+                const targetView = document.getElementById(targetViewId);
+                targetView.style.display = 'block';
+                // Kis késleltetés kell, hogy a display:block érvényesüljön, mielőtt az opacity-t állítjuk
+                setTimeout(() => {
+                    targetView.classList.add('active');
+                    targetView.style.opacity = '1';
+                }, 50);
+            }, 300);
+        }
+
+        // --- TOAST ÉRTESÍTÉS RENDSZER ---
+        function showToast(message) {
+            const toast = document.getElementById('toastMsg');
+            document.getElementById('toastText').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    </script>
+</body>
+</html>
