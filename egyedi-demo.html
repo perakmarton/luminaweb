@@ -80,6 +80,15 @@
         .toast { position: fixed; bottom: 30px; right: 30px; background: white; color: #0f172a; padding: 15px 25px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transform: translateY(100px); opacity: 0; transition: 0.4s; display: flex; align-items: center; gap: 10px; z-index: 1000;}
         .toast.show { transform: translateY(0); opacity: 1; }
         .toast-icon { background: var(--success); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; }
+    /* MOBIL NÉZET JAVÍTÁSA */
+        @media(max-width: 768px) {
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            .hero { flex-direction: column; text-align: center; padding: 40px 5%; }
+            .hero-text, .hero-img { max-width: 100%; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-img { margin-top: 30px; }
+            .grid { grid-template-columns: 1fr; } /* Egymás alá teszi a kártyákat */
+        }
     </style>
 </head>
 <body>
@@ -357,3 +366,4 @@
 </body>
 
 </html>
+
