@@ -56,6 +56,15 @@
         .modal-content input:focus, .modal-content textarea:focus { border-color: var(--gold); }
 
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        /* MOBIL NÉZET JAVÍTÁSA */
+        @media(max-width: 768px) {
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            .hero { flex-direction: column; text-align: center; padding: 40px 5%; }
+            .hero-text, .hero-img { max-width: 100%; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-img { margin-top: 30px; }
+            .grid { grid-template-columns: 1fr; } /* Egymás alá teszi a kártyákat */
+        }
     </style>
 </head>
 <body>
@@ -184,4 +193,5 @@
 </body>
 
 </html>
+
 
