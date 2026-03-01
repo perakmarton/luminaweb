@@ -366,11 +366,31 @@
         }
     });
     </script>
-    <div id="cookieBanner" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0f172a; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 9999; box-shadow: 0 -5px 15px rgba(0,0,0,0.1);">
+    <div id="cookieBanner" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0f172a; color: white; padding: 15px 5%; justify-content: space-between; align-items: center; z-index: 9999; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); display: none;">
         <p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">Ez a weboldal sütiket (cookie-kat) használ a jobb felhasználói élmény és az analitika érdekében. Az oldal használatával elfogadja az <a href="adatvedelem.html" style="color: var(--accent-color); text-decoration: underline;">Adatvédelmi tájékoztatóban</a> foglaltakat.</p>
-        <button onclick="document.getElementById('cookieBanner').style.display='none'" style="background: var(--accent-color); color: #0f172a; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-left: 20px; white-space: nowrap;">Rendben, elfogadom</button>
+        <button id="acceptCookies" style="background: var(--accent-color); color: #0f172a; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-left: 20px; white-space: nowrap;">Rendben, elfogadom</button>
     </div>
+
+    <script>
+        // Sütisáv memóriájának kezelése
+        document.addEventListener("DOMContentLoaded", function() {
+            const cookieBanner = document.getElementById("cookieBanner");
+            const acceptBtn = document.getElementById("acceptCookies");
+
+            // Megnézzük, hogy a böngésző memóriájában van-e már nyoma az elfogadásnak
+            if (!localStorage.getItem("cookieAccepted")) {
+                cookieBanner.style.display = "flex"; // Ha nincs, megjelenítjük a sávot
+            }
+
+            // Ha rákattint a gombra, elmentjük a memóriába, és eltüntetjük a sávot
+            acceptBtn.addEventListener("click", function() {
+                localStorage.setItem("cookieAccepted", "true");
+                cookieBanner.style.display = "none";
+            });
+        });
+    </script>
 </body>
 
 </html>
+
 
