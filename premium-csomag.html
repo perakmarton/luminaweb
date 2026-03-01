@@ -113,14 +113,12 @@
     </section>
 <section class="contact section bg-light" id="contact">
         <div class="container">
-            <h2 class="text-center">Kérjen Ajánlatot Erre A Csomagra</h2>
+            <h2 class="text-center">Kérjen Ajánlatot</h2>
             <div class="divider"></div>
             <div class="grid grid-2">
-                <form class="contact-form" action="https://formspree.io/f/xreadvev" method="POST">
+                
+                <form id="myContactForm" class="contact-form" action="https://formspree.io/f/xreadvev" method="POST">
                     
-                    <input type="hidden" name="_next" value="https://a-te-leendo-domained.hu/koszonjuk.html">
-                    <input type="hidden" name="Kiválasztott_Csomag" value="PREMIUM CSOMAG">
-
                     <div class="form-group-row">
                         <div class="form-group">
                             <label for="name">Név vagy Cégnév *</label>
@@ -172,7 +170,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <label for="message">Projekt rövid leírása *</label>
                         <textarea id="message" name="message" rows="4" required placeholder="Meséljen a céljairól..."></textarea>
@@ -192,10 +189,11 @@
                     <h3>Elérhetőségek</h3>
                     <p>Ha kérdése van, keressen bizalommal az alábbi elérhetőségeken.</p>
                     <ul class="info-list">
-                        <li><strong>Email:</strong> <a href="mailto:pmarton0929@gmail.com" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">pmarton0929@gmail.com</a></li>
-                        <li><strong>Telefon:</strong> <a href="tel:+36301087050">+36 30 108 7050</a></li>
+                        <li><strong>Email:</strong> <a href="mailto:pmarton0929@gmail.com?subject=Érdeklődés%20weboldal%20készítés%20iránt" style="color: var(--accent-color); font-weight: bold; text-decoration: none;">pmarton0929@gmail.com</a></li>
+                        <li><strong>Telefon:</strong> <a href="tel:+36301087050">+36301087050</a></li>
                     </ul>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -206,7 +204,43 @@
             </div>
         </div>
     </footer>
+<script>
+        document.getElementById("myContactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Megakadályozza, hogy átugorjon a Formspree oldalára
+            
+            var form = event.target;
+            var data = new FormData(form);
+            var submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Gomb átírása küldés közben
+            var originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = "Küldés folyamatban...";
+            submitBtn.style.opacity = "0.7";
 
+            // Adatok elküldése a háttérben
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // HA SIKERES: Azonnali átirányítás a Te köszönjük oldaladra!
+                    window.location.href = "koszonjuk.html";
+                } else {
+                    alert("Hiba történt az elküldés során. Kérlek próbáld újra!");
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.opacity = "1";
+                }
+            }).catch(error => {
+                alert("Hálózati hiba történt.");
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.style.opacity = "1";
+            });
+        });
+    </script>
 </body>
 
 </html>
+
