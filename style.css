@@ -934,10 +934,11 @@ input:focus, select:focus, textarea:focus {
         box-sizing: border-box !important;
     }
 
-    /* A csomag oldalak felső sötét része ne nyomódjon össze */
-    .package-hero {
-        padding: 100px 15px 40px 15px !important;
+   /* A csomag oldalak felső sötét része ne nyomódjon össze és férjen be a menü alá */
+    .package-hero, .subpage-header, .premium-header {
+        padding: 150px 15px 40px 15px !important; /* A 100px-et felemeltük 150px-re! */
         background-size: cover !important;
     }
 }
+
 
