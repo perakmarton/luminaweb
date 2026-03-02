@@ -824,4 +824,26 @@ input:focus, select:focus, textarea:focus {
 
 .btn-gold-outline:hover {
     background: rgba(212, 175, 55, 0.1); /* Világos sárga háttér hoverre */
+
+}
+/* --- AKCIÓS SÁV (PROMO BANNER) FIXÁLÁSA LEGFELÜL --- */
+.promo-banner {
+    position: relative !important; /* Nem lebeg, hanem fixen a dokumentum része */
+    top: 0 !important;
+    transform: none !important; /* Kikapcsolja a csúszkáló animációkat */
+    animation: none !important; 
+    display: block !important;
+    width: 100%;
+    z-index: 1001; /* Legfelül maradjon minden rétegen */
+    background: linear-gradient(90deg, #0f172a, #1e293b); /* Elegáns sötét háttér */
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* --- MENÜ (NAVBAR) BEÁLLÍTÁSA --- */
+.navbar {
+    position: sticky !important; /* Ez a varázsszó: ha legörgetsz, a menü rátapad a képernyő tetejére! */
+    top: 0 !important;
+    z-index: 1000;
+    background-color: #0b0f19 !important; /* Háttérszín, hogy görgetésnél ne látsszon át alatta a szöveg */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* Egy kis árnyék, hogy kiemelkedjen */
 }
