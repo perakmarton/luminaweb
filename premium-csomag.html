@@ -10,11 +10,12 @@
 </head>
 <body class="bg-light">
 
-    <nav class="navbar">
+   <nav class="navbar">
             <div class="brand-group" style="display: flex; align-items: center; gap: 30px;">
                 <div class="logo">
-                    <a href="index.html">
-                        <span class="logo-brackets">&lt; &gt;</span> Lumina<span>Web</span>
+                    <a href="index.html#home" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                        <img src="logo.jpg" alt="LuminaWeb Logo" style="height: 45px; border-radius: 8px;">
+                        <span style="color: white;">Lumina</span><span style="color: var(--accent-color, #d4af37);">Web</span>
                     </a>
                 </div>
                 
@@ -22,13 +23,18 @@
                     <span><span style="color: #e34f26;">&lt;/&gt;</span> HTML5</span>
                     <span><span style="color: #4da5df;">#</span> CSS3</span>
                     <span><span style="color: #f7df1e;">{ }</span> JS</span>
-                    <span><span style="color: #818cf8;">💳</span> Stripe</span>
                     <span><span style="color: #a259ff;">🎨</span> Figma</span>
                 </div>
             </div>
 
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <ul class="nav-links">
-                <a href="index.html#home" class="btn btn-outline-small">Kezdőlap</a>
+                <li><a href="index.html#home" class="btn btn-outline-small">Kezdőlap</a></li>
                 <li><a href="index.html#about">Rólam</a></li>
                 <li><a href="index.html#services">Szolgáltatások</a></li>
                 <li><a href="index.html#portfolio">Élő Demók</a></li>
@@ -241,9 +247,24 @@
             });
         });
     </script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                // Ha rákattintasz a 3 vonalra, kinyílik/becsukódik a menü
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
+
 
 
 
