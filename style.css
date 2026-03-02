@@ -916,3 +916,26 @@ input:focus, select:focus, textarea:focus {
         transform: translateY(-9px) rotate(-45deg);
     }
 }
+/* --- CSOMAG OLDALAK MOBILOS NÉZETE --- */
+@media (max-width: 768px) {
+    /* Ha a csomag oldalon grid-et (rácsot) vagy flex-et használtál a dobozokhoz: */
+    .package-container, .grid-2, .package-details form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    /* A kártyák (dobozok) kitöltik a képernyőt */
+    .package-card, .info-box, .order-box {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    /* A felső sötétkék rész (Hero) igazítása */
+    .package-hero, .hero {
+        padding: 80px 15px 40px 15px !important;
+        background-size: cover !important;
+    }
+}
