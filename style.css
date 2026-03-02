@@ -916,7 +916,9 @@ input:focus, select:focus, textarea:focus {
         transform: translateY(-9px) rotate(-45deg);
     }
 }
-/* --- CSOMAG OLDALAK MOBILOS NÉZETE (ERŐSÍTETT) --- */
+/* ==========================================================================
+   CSOMAG OLDALAK MOBILOS NÉZETE ÉS FEJLÉC JAVÍTÁS
+   ========================================================================== */
 @media (max-width: 992px) {
     /* Minden létező rácsot (grid) egymás alá kényszerítünk */
     .grid, .grid-2, .grid-3, .grid-4, .package-container, .package-details form, .features-grid, .package-grid {
@@ -933,34 +935,33 @@ input:focus, select:focus, textarea:focus {
         margin: 0 !important;
         box-sizing: border-box !important;
     }
-
-   /* A csomag oldalak felső sötét része ne nyomódjon össze */
-    .package-hero, .subpage-header, .premium-header, #egyedi-hero {
-        padding-top: 160px !important;
-        padding-bottom: 40px !important;
-        background-size: cover !important;
-    }
 }
-/* 1. Ne nyomjuk le annyira az egész részt mobilon, hogy a buborék feljebb lehessen */
-    .package-hero, .subpage-header, .premium-header, #egyedi-hero {
-        padding-top: 110px !important; /* Visszavettük, így feljebb megy a buborék */
-        padding-bottom: 40px !important;
-        background-size: cover !important;
-    }
 
-    /* 2. EZ A LÉNYEG: A buborék (badge) és a Cím (h1) széttolása, hogy ne lógjanak egymásba! */
-    .subpage-header .badge, .package-hero .badge, .premium-header .badge {
-        display: inline-block !important;
-        margin-bottom: 25px !important; /* Ez a varázsszó: 25 pixel üres helyet csinál a buborék alá! */
-        position: relative !important;
-    }
-    
-    /* Biztosítjuk, hogy a cím (h1) is a helyén maradjon */
-    .subpage-header h1, .package-hero h1, .premium-header h1 {
-        margin-top: 0 !important;
-        line-height: 1.3 !important;
-    }
+/* --- KÖZÖS JAVÍTÁS A CSOMAGOK FEJLÉCÉRE (Mobilon és gépen is tökéletes lesz) --- */
+.package-hero, .subpage-header, .premium-header, #egyedi-hero {
+    padding-top: 140px !important; /* Bőven van hely a felső menünek */
+    padding-bottom: 50px !important;
+    background-size: cover !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Mindent tökéletesen középre húz */
+    text-align: center;
+}
 
+/* --- A BUBORÉK (BADGE) MEGJAVÍTÁSA: Ne lebegjen, tolja el a címet! --- */
+.package-hero .badge, .subpage-header .badge, .premium-header .badge, .badge-gold {
+    position: relative !important; /* Megszünteti a lebegést, visszateszi a térbe */
+    top: 0 !important; /* Nem csúszik fel */
+    transform: none !important; /* Eltünteti a korábbi elcsúszást */
+    display: inline-block !important;
+    margin-bottom: 25px !important; /* EZ A VARÁZSSZÓ: 25px üres hely a buborék alatt! */
+    margin-top: 0 !important;
+}
 
+/* --- A főcím (h1) igazítása a buborék alatt --- */
+.package-hero h1, .subpage-header h1, .premium-header h1, #egyedi-hero h1 {
+    margin-top: 0 !important;
+    line-height: 1.3 !important;
+}
 
 
