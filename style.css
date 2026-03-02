@@ -939,3 +939,21 @@ input:focus, select:focus, textarea:focus {
         background-size: cover !important;
     }
 }
+/* --- CSOMAG OLDALAK MOBILOS NÉZETE --- */
+@media (max-width: 768px) {
+    /* Egymás alá rendezzük a tartalmat */
+    .package-container, .grid-2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 0 15px !important;
+    }
+
+    /* A dobozok kitöltik a telefon képernyőjét */
+    .package-card, .info-box, .order-box {
+        width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+}
