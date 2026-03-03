@@ -17,20 +17,22 @@
     <meta property="og:url" content="https://www.LuminaWeb.hu/"> <meta property="og:image" content="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1200">
 </head>
 <body>
-    <div id="promo-banner" class="promo-banner">
-        <div class="container promo-content">
-            <div class="promo-text">
-                <span class="pulse-dot"></span>
-                <strong>Portfólióépítő Akció!</strong> Az első 5 ügyfelemnek 50% kedvezményt biztosítok. 
-            </div>
-            <div class="promo-counter">
-                <span class="spots-badge" style="padding: 5px 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Ne maradj le!</span>
+   <body>
+    <div id="smartHeader" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1005; transition: top 0.3s ease-in-out;">
+        
+        <div id="promo-banner" class="promo-banner">
+            <div class="container promo-content">
+                <div class="promo-text">
+                    <span class="pulse-dot"></span>
+                    <strong>Portfólióépítő Akció!</strong> Az első 5 ügyfelemnek 50% kedvezményt biztosítok. 
+                </div>
+                <div class="promo-counter">
+                    <span class="spots-badge" style="padding: 5px 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Ne maradj le!</span>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <header class="hero" id="home">
-        <nav class="navbar">
+        
+        <nav class="navbar" style="position: relative !important; background-color: rgba(11, 15, 25, 0.98); border-bottom: 1px solid rgba(255,255,255,0.05);">
             <div class="brand-group" style="display: flex; align-items: center; gap: 30px;">
                 <div class="logo">
                     <a href="index.html">
@@ -52,7 +54,7 @@
                 <span></span>
             </div>
 
-           <ul class="nav-links">
+            <ul class="nav-links">
                 <li><a href="#about">Rólam</a></li>
                 <li><a href="#services">Szolgáltatások</a></li>
                 <li><a href="#portfolio">Élő Demók</a></li>
@@ -60,7 +62,8 @@
                 <li><a href="#contact" class="btn btn-outline-small">Kapcsolat</a></li>
             </ul>
         </nav>
-        
+    </div>
+    <header class="hero" id="home" style="padding-top: 140px;">
         <div class="hero-content">
             <h1>Ügyfélszerző Weboldalak Vállalkozásoknak</h1>
             <p style="font-size: 1.25rem; max-width: 700px; margin-bottom: 40px; color: #e2e8f0; line-height: 1.8;">
@@ -436,9 +439,28 @@
             }
         });
     </script>
-</body>
+<script>
+        // --- SMART HEADER (Eltűnik lefelé, megjelenik felfelé) ---
+        let lastScrollTop = 0;
+        const smartHeader = document.getElementById('smartHeader');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Ha legalább 100 pixelt görgettünk és lefelé megyünk
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                smartHeader.style.top = "-150px"; // Felhúzza a menüt a képernyőn kívülre
+            } else {
+                smartHeader.style.top = "0"; // Visszaengedi, ha felfelé görgetünk
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+    </script>
+   </body>
 
 </html>
+
 
 
 
