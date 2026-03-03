@@ -10,53 +10,44 @@
 </head>
 <body class="bg-light">
 
-   <header class="subpage-header premium-header" id="alap-hero" style="padding-top: 20px; padding-bottom: 80px;">
-        
-        <nav class="navbar">
-            <div class="brand-group" style="display: flex; align-items: center; gap: 30px;">
-                <div class="logo">
-                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-                        <span class="logo-brackets" style="color: #fbbf24; font-weight: 900; margin-right: 5px;">&lt; &gt;</span> 
-                        <span style="color: white; font-weight: 700; font-size: 1.5rem;">Lumina</span><span style="color: #fbbf24; font-weight: 700; font-size: 1.5rem;">Web</span>
-                    </a>
-                </div>
-                
-                <div class="header-tech-stack" style="display: flex; gap: 15px; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; border-left: 1px solid rgba(255,255,255,0.15); padding-left: 30px;">
-                    <span><span style="color: #e34f26;">&lt;/&gt;</span> HTML5</span>
-                    <span><span style="color: #4da5df;">#</span> CSS3</span>
-                    <span><span style="color: #f7df1e;">{ }</span> JS</span>
-                    <span><span style="color: #a259ff;">🎨</span> Figma</span>
-                </div>
+  <nav class="navbar" id="smartNavbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #0b0f19; transition: top 0.3s ease-in-out;">
+        <div class="brand-group" style="display: flex; align-items: center; gap: 30px;">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <span class="logo-brackets" style="color: #fbbf24; font-weight: 900; margin-right: 5px;">&lt; &gt;</span> 
+                    <span style="color: white; font-weight: 700; font-size: 1.5rem;">Lumina</span><span style="color: #fbbf24; font-weight: 700; font-size: 1.5rem;">Web</span>
+                </a>
             </div>
-
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            
+            <div class="header-tech-stack" style="display: flex; gap: 15px; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; border-left: 1px solid rgba(255,255,255,0.15); padding-left: 30px;">
+                <span><span style="color: #e34f26;">&lt;/&gt;</span> HTML5</span>
+                <span><span style="color: #4da5df;">#</span> CSS3</span>
+                <span><span style="color: #f7df1e;">{ }</span> JS</span>
+                <span><span style="color: #a259ff;">🎨</span> Figma</span>
             </div>
+        </div>
 
-            <ul class="nav-links">
-                <li><a href="index.html#home">Kezdőlap</a></li>
-                <li><a href="index.html#about">Rólam</a></li>
-                <li><a href="index.html#services">Szolgáltatások</a></li>
-                <li><a href="index.html#portfolio">Élő Demók</a></li>
-                <li><a href="index.html#pricing">Árak</a></li>
-                <li><a href="index.html#contact" class="btn btn-outline-small">Kapcsolat</a></li>
-            </ul>
-        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-        <div class="container" style="text-align: center; margin-top: 100px;">
+        <ul class="nav-links">
+            <li><a href="index.html#home">Kezdőlap</a></li>
+            <li><a href="index.html#about">Rólam</a></li>
+            <li><a href="index.html#services">Szolgáltatások</a></li>
+            <li><a href="index.html#portfolio">Élő Demók</a></li>
+            <li><a href="index.html#pricing">Árak</a></li>
+            <li><a href="index.html#contact" class="btn btn-outline-small">Kapcsolat</a></li>
+        </ul>
+    </nav>
+
+    <header class="subpage-header premium-header" id="alap-hero" style="padding-top: 160px; padding-bottom: 80px;">
+        <div class="container" style="text-align: center;">
             <span class="badge badge-gold" style="background-color: #cbd5e1; color: var(--primary-color); position: relative; left: auto; transform: none; display: inline-block; margin-bottom: 20px;">Költséghatékony Indulás</span>
             <h1 style="margin-top: 0; color: white;">Alap Csomag</h1>
             <p class="subtitle" style="color: #cbd5e1;">Letisztult, gyors és mobilbarát weboldal a sikeres online induláshoz. Egy profi digitális névjegykártya a vállalkozásodnak.</p>
-        </div>
-        
-    </header>
-<header class="subpage-header premium-header" id="alap-hero" style="padding-top: 160px; padding-bottom: 80px;">
-        <div class="container" style="text-align: center;">
-            <span class="badge badge-gold" style="background-color: #cbd5e1; color: var(--primary-color); position: relative; left: auto; transform: none; display: inline-block; margin-bottom: 20px;">Költséghatékony Indulás</span>
-            <h1 style="margin-top: 0;">Alap Csomag</h1>
-            <p class="subtitle">Letisztult, gyors és mobilbarát weboldal a sikeres online induláshoz. Egy profi digitális névjegykártya a vállalkozásodnak.</p>
         </div>
     </header>
     <section class="package-details container">
@@ -270,9 +261,29 @@
             }
         });
     </script>
+<script>
+    // --- SMART NAVBAR (Eltűnik lefelé, megjelenik felfelé) ---
+    let lastScrollTop = 0;
+    const smartNavbar = document.getElementById('smartNavbar');
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Ha legalább 100 pixelt már lementünk, ÉS lefelé görgetünk
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            smartNavbar.style.top = "-100px"; // Felcsúszik a képernyőn kívülre
+        } else {
+            // Ha felfelé görgetünk (vagy a legtetején vagyunk)
+            smartNavbar.style.top = "0"; // Visszacsúszik
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+</script>
 </body>
 
 </html>
+
 
 
 
