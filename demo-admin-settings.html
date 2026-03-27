@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Beállítások | Admin Demó</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Egyedi CMS / Admin Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+<div class="sidebar">
+        <div class="sidebar-logo">Lumina<span>Admin</span></div>
+        <div class="sidebar-menu">
+            <a href="demo-admin.html" class="menu-item"><i class="fas fa-chart-pie"></i> <span>Vezérlőpult</span></a>
+            <a href="demo-admin-orders.html" class="menu-item"><i class="fas fa-shopping-cart"></i> <span>Rendelések</span></a>
+            <a href="demo-admin-customers.html" class="menu-item"><i class="fas fa-users"></i> <span>Ügyfelek</span></a>
+            <a href="demo-admin-products.html" class="menu-item"><i class="fas fa-box"></i> <span>Termékek</span></a>
+            <a href="demo-admin-restock.html" class="menu-item"><i class="fas fa-truck-loading"></i> <span>Berendelés</span></a>
+            
+            <div style="flex-grow: 1;"></div>
+            
+            <a href="demo-admin-settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>Beállítások</span></a>
+            <a href="index.html" class="menu-item" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> <span>Kijelentkezés</span></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+<div class="top-header">
+    <h2 class="page-title">Fiók Beállítások</h2>
+    
+    <div class="header-actions">
+        <div class="profile-menu-container">
+            <div class="admin-profile" onclick="toggleProfileMenu()">
+                <span>Kiss Péter</span>
+                <img src="https://ui-avatars.com/api/?name=Kiss+Peter&background=3b82f6&color=fff" alt="Admin">
+                <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px; color: var(--admin-muted);"></i>
+            </div>
+            
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="dropdown-header">
+                    <strong>Kiss Péter</strong>
+                    <p>admin@pelda.hu</p>
+                </div>
+                <hr>
+                <a href="demo-admin-settings.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Fiókom
+                </a>
+                <a href="demo-admin-settings.html" class="dropdown-item">
+                    <i class="fas fa-cog"></i> Beállítások
+                </a>
+                <div class="dropdown-item" onclick="toggleAdminTheme()" style="display: flex; align-items: center; width: 100%;">
+                    <i id="dropdown-theme-icon" class="fas fa-moon"></i> Éjszakai Mód 
+                    <span id="dropdown-theme-text" style="margin-left:auto; font-size:12px; color:var(--admin-muted); font-weight:700;">Ki</span>
+                </div>
+                <hr>
+                <a href="index.html" class="dropdown-item text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="content-pad">
+            <div class="settings-grid">
+                
+                <div class="settings-card">
+                    <h3>Email cím módosítása</h3>
+                    <p class="desc">Az elsődleges email címed, ahova a rendszer értesítéseit kapod.</p>
+                    <form onsubmit="handleEmailChange(event)">
+                        <div class="form-group">
+                            <label>Jelenlegi email cím</label>
+                            <input type="email" id="current-email" class="form-control" value="admin@pelda.hu" readonly style="background: #f1f5f9; color: #94a3b8; cursor: not-allowed; border-color: transparent;">
+                        </div>
+                        <div class="form-group">
+                            <label>Új email cím</label>
+                            <input type="email" id="new-email" class="form-control" placeholder="uj.email@pelda.hu" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Biztonsági megerősítés (Jelenlegi jelszó)</label>
+                            <input type="password" id="email-confirm-pass" class="form-control" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Módosítás mentése</button>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Jelszó megváltoztatása</h3>
+                    <p class="desc">A fiókod biztonsága érdekében használj erős, legalább 8 karakteres jelszót.</p>
+                    <form onsubmit="handlePasswordChange(event)">
+                        <div class="form-group">
+                            <label>Jelenlegi jelszó</label>
+                            <input type="password" id="old-pass" class="form-control" placeholder="••••••••" required>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label>Új jelszó</label>
+                            <input type="password" id="new-pass" class="form-control" placeholder="Minimum 8 karakter" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Új jelszó megerősítése</label>
+                            <input type="password" id="new-pass-confirm" class="form-control" placeholder="Minimum 8 karakter" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Jelszó frissítése</button>
+                    </form>
+                </div>
+
+                <div class="settings-card danger-zone">
+                    <h3>Fiók törlése</h3>
+                    <p class="desc">Vigyázat! A fiók és az összes hozzá tartozó adat (rendelések, ügyfelek) véglegesen törlődik. Ez a művelet nem vonható vissza.</p>
+                    <form onsubmit="handleDeleteAccount(event)">
+                        <div class="form-group">
+                            <label style="color: #991b1b;">Írja be a "TÖRLÉS" szót a megerősítéshez:</label>
+                            <input type="text" id="delete-confirm-word" class="form-control" placeholder="TÖRLÉS" required style="border-color: #fca5a5;">
+                        </div>
+                        <button type="submit" class="btn-danger">Fiók végleges törlése</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-toast"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

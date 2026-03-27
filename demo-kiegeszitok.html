@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiegészítők | Webshop Demó</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-links">
+            <a href="demo-webshop.html">Minden Termék</a>
+            <a href="demo-ruhazat.html">Ruházat</a>
+            <a href="demo-kiegeszitok.html" class="active">Kiegészítők</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon">
+                <i class="fas fa-shopping-bag" style="font-size: 18px;"></i>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 40px;">
+        <h2 class="section-title">Kiegészítők</h2>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(3, 'Midnight Chronograph Óra', 65990, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Midnight Chronograph Óra</h3>
+                <p class="product-price">65 990 Ft</p>
+            </div>
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(4, 'Napszemüveg Aviator', 24990, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Napszemüveg Aviator</h3>
+                <p class="product-price">24 990 Ft</p>
+            </div>
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(6, 'Canvas Tote Táska', 12500, 'https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Canvas Tote Táska</h3>
+                <p class="product-price">12 500 Ft</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="shop.js"></script>
+</body>
+</html>

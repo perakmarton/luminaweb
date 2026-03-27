@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Termékek | Admin Demó</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő B2B CMS / Admin Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+<div class="sidebar">
+        <div class="sidebar-logo">Lumina<span>Admin</span></div>
+        <div class="sidebar-menu">
+            <a href="demo-admin.html" class="menu-item"><i class="fas fa-chart-pie"></i> <span>Vezérlőpult</span></a>
+            <a href="demo-admin-orders.html" class="menu-item"><i class="fas fa-shopping-cart"></i> <span>Rendelések</span></a>
+            <a href="demo-admin-customers.html" class="menu-item"><i class="fas fa-users"></i> <span>Ügyfelek</span></a>
+            <a href="demo-admin-products.html" class="menu-item"><i class="fas fa-box"></i> <span>Termékek</span></a>
+            <a href="demo-admin-restock.html" class="menu-item"><i class="fas fa-truck-loading"></i> <span>Berendelés</span></a>
+            
+            <div style="flex-grow: 1;"></div>
+            
+            <a href="demo-admin-settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>Beállítások</span></a>
+            <a href="index.html" class="menu-item" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> <span>Kijelentkezés</span></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-header">
+            <h2 class="page-title">Katalógus Kezelése</h2>
+<div class="header-actions">
+    <div class="profile-menu-container">
+        <div class="admin-profile" onclick="toggleProfileMenu()">
+            <span>Kiss Péter</span>
+            <img src="https://ui-avatars.com/api/?name=Kiss+Peter&background=3b82f6&color=fff" alt="Admin">
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px; color: var(--admin-muted);"></i>
+        </div>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+                <strong>Kiss Péter</strong>
+                <p>admin@pelda.hu</p>
+            </div>
+            <hr>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-user-circle"></i> Fiókom
+            </a>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Beállítások
+            </a>
+            <div class="dropdown-item" onclick="toggleAdminTheme()">
+                <i id="dropdown-theme-icon" class="fas fa-moon"></i> Éjszakai Mód 
+                <span id="dropdown-theme-text" style="margin-left:auto; font-size:12px; color:var(--admin-muted); font-weight:700;">Ki</span>
+            </div>
+            <hr>
+            <a href="index.html" class="dropdown-item text-danger">
+                <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div class="content-pad">
+            <div class="table-card">
+                <div class="table-header">Minden Termék</div>
+                <table class="admin-table">
+                    <thead><tr><th>Termék</th><th>Részletek (Anyag / Kategória)</th><th>Ár</th><th>Készlet</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-product">
+                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200">
+                                    <div><strong>Midnight Óra</strong><span>ID: PROD-101</span></div>
+                                </div>
+                            </td>
+                            <td>Rozsdamentes Acél / Kiegészítő</td>
+                            <td>65 990 Ft</td>
+                            <td><span class="status-badge status-success">45 db raktáron</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-product">
+                                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=200">
+                                    <div><strong>Premium Póló</strong><span>ID: PROD-102</span></div>
+                                </div>
+                            </td>
+                            <td>100% Organikus Pamut / Ruházat</td>
+                            <td>8 990 Ft</td>
+                            <td><span class="status-badge status-pending" style="color:#dc2626; border-color:#dc2626; background:transparent;">5 db (Kritikus!)</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-product">
+                                    <img src="https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=200">
+                                    <div><strong>Tote Táska</strong><span>ID: PROD-103</span></div>
+                                </div>
+                            </td>
+                            <td>Vászon / Kiegészítő</td>
+                            <td>12 500 Ft</td>
+                            <td><span class="status-badge status-success">112 db raktáron</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

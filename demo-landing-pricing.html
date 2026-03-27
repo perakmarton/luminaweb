@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Árak | SaaS Landing Demó</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-bar">Élő SaaS Landing Demó <a href="index.html">← Vissza a portfólióhoz</a></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><a href="demo-landing.html">Task<span>Flow</span></a></div>
+            <div class="nav-links">
+                <a href="demo-landing-features.html" class="menu-link">Funkciók</a>
+                <a href="demo-landing-pricing.html" class="menu-link">Árak</a>
+                <a href="demo-landing-about.html" class="menu-link">Rólunk</a>
+                <div style="width: 1px; height: 20px; background: var(--saas-border); margin: 0 10px;"></div>
+                <button onclick="openModal('login')" class="login-btn">Bejelentkezés</button>
+                <button onclick="openModal('register')" class="btn-primary" style="padding: 10px 20px;">Próbáld ki ingyen</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-glow"></div>
+
+    <div class="page-header">
+        <h1>Átlátható árazás, rejtett költségek nélkül</h1>
+        <p>Válaszd ki a csapatod méretének megfelelő csomagot. Bármikor válthatsz vagy lemondhatod.</p>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Kezdő</h3>
+            <p style="color: var(--saas-muted);">Kisebb csapatoknak</p>
+            <div class="price">5 999 Ft<span> / hó</span></div>
+            <button class="btn-outline" style="width: 100%;" onclick="openModal('register')">Ingyenes Kezdés</button>
+            <ul class="pricing-list">
+                <li><i class="fas fa-check"></i> Max 3 felhasználó</li>
+                <li><i class="fas fa-check"></i> Alap feladatkezelés</li>
+                <li><i class="fas fa-check"></i> 5GB tárhely</li>
+            </ul>
+        </div>
+
+        <div class="pricing-card popular">
+            <div class="popular-badge">Legnépszerűbb</div>
+            <h3>Pro</h3>
+            <p style="color: var(--saas-muted);">Növekvő vállalkozásoknak</p>
+            <div class="price">49 990 Ft<span> / hó</span></div>
+            <button class="btn-primary" style="width: 100%;" onclick="openModal('register')">14 napos próba</button>
+            <ul class="pricing-list">
+                <li><i class="fas fa-check"></i> Korlátlan felhasználó</li>
+                <li><i class="fas fa-check"></i> AI asszisztens (1000 prompt)</li>
+                <li><i class="fas fa-check"></i> Haladó analitika</li>
+                <li><i class="fas fa-check"></i> 100GB tárhely</li>
+            </ul>
+        </div>
+
+        <div class="pricing-card">
+            <h3>Enterprise</h3>
+            <p style="color: var(--saas-muted);">Nagyvállalatoknak</p>
+            <div class="price">Egyedi</div>
+            <button class="btn-outline" style="width: 100%;" onclick="openModal('demo')">Kapcsolatfelvétel</button>
+            <ul class="pricing-list">
+                <li><i class="fas fa-check"></i> Dedikált szerver</li>
+                <li><i class="fas fa-check"></i> Korlátlan AI használat</li>
+                <li><i class="fas fa-check"></i> Egyedi integrációk</li>
+                <li><i class="fas fa-check"></i> 0-24 Kiemelt támogatás</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">Bejelentkezés</h2>
+                <p id="modalDesc">Jelentkezz be a folytatáshoz.</p>
+            </div>
+
+            <button class="btn-google" id="modalGoogleBtn">
+                <i class="fab fa-google" style="color: #ea4335; font-size: 16px;"></i> Folytatás Google fiókkal
+            </button>
+            
+            <div class="divider" id="modalDivider">vagy email címmel</div>
+
+            <div id="nameGroup" class="form-group" style="display: none;">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Teljes név">
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email cím">
+            </div>
+            
+            <div id="passwordGroup">
+                <div class="form-group" style="margin-bottom: 8px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Jelszó">
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" onclick="openModal('forgot')" style="color: var(--saas-primary); font-size: 12px; font-weight: 600; text-decoration: none;">Elfelejtetted a jelszavad?</a>
+                </div>
+            </div>
+            
+            <button id="modalSubmitBtn" class="btn-primary" style="width: 100%;" onclick="submitForm()">Tovább</button>
+
+            <div class="modal-footer" id="modalFooter">
+                Nincs még fiókod? <a onclick="openModal('register')">Regisztrálj!</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="saas-toast"></div>
+    <script src="landing.js"></script>
+</body>
+</html>

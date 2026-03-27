@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Premium Pamut Póló | Webshop Demó</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-links">
+            <a href="demo-webshop.html">Minden Termék</a>
+            <a href="demo-ruhazat.html">Ruházat</a>
+            <a href="demo-kiegeszitok.html">Kiegészítők</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon">
+                <i class="fas fa-shopping-bag" style="font-size: 18px;"></i>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="demo-webshop.html">← Vissza a teljes kollekcióhoz</a>
+        </div>
+
+        <div class="product-detail-grid">
+            <div class="product-gallery">
+                <img id="main-product-img" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000" class="main-image" alt="Premium Pamut Póló">
+                <div class="thumbnail-list">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600" class="thumbnail active" onclick="changeImage(this)">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=600" class="thumbnail" onclick="changeImage(this)">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600" class="thumbnail" onclick="changeImage(this)">
+                </div>
+            </div>
+
+            <div class="product-meta">
+                <h1>Premium Pamut Póló</h1>
+                
+                <div class="reviews">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <span>4.8 (124 értékelés)</span>
+                </div>
+
+                <div class="price">8 990 Ft</div>
+                
+                <p class="desc">
+                    Emeld a mindennapi megjelenésed a következő szintre. Ez a póló 100% organikus, fésült pamutból készült, amely hihetetlenül puha tapintást és tökéletes légáteresztést biztosít. A letisztult szabásvonalnak köszönhetően önmagában, vagy egy zakó alatt is elegáns hatást kelt.
+                </p>
+
+                <div class="size-selector">
+                    <h4>Méret kiválasztása</h4>
+                    <div class="size-options">
+                        <button class="size-btn" onclick="selectSize(this)">S</button>
+                        <button class="size-btn active" onclick="selectSize(this)">M</button>
+                        <button class="size-btn" onclick="selectSize(this)">L</button>
+                        <button class="size-btn" onclick="selectSize(this)">XL</button>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <div class="qty-selector">
+                        <button class="qty-btn" onclick="changeDetailQty(-1)">-</button>
+                        <input type="text" id="detail-qty" class="qty-input" value="1" readonly>
+                        <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
+                    </div>
+                    <button class="btn-dark" onclick="addDetailToCart()">Kosárba teszem</button>
+                </div>
+
+                <ul class="features-list">
+                    <li><i class="fas fa-leaf"></i> 100% Organikus és fenntartható pamut</li>
+                    <li><i class="fas fa-truck"></i> Ingyenes házhozszállítás 20.000 Ft felett</li>
+                    <li><i class="fas fa-undo"></i> 30 napos pénzvisszafizetési garancia</li>
+                    <li><i class="fas fa-tshirt"></i> Formatartó anyag (nem nyúlik ki mosáskor)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="shop.js"></script>
+
+    <script>
+        // Elmentjük az alapértelmezett méretet
+        let selectedSize = 'M';
+
+        // Mini galéria logika
+        function changeImage(element) {
+            document.getElementById('main-product-img').src = element.src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Méretválasztó logika (Most már ténylegesen el is menti a méretet!)
+        function selectSize(element) {
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            // Itt frissítjük a kiválasztott méretet a gomb szövege alapján (S, M, L, XL)
+            selectedSize = element.innerText.trim(); 
+        }
+
+        // Mennyiség állító ezen az oldalon
+        function changeDetailQty(change) {
+            let input = document.getElementById('detail-qty');
+            let val = parseInt(input.value) + change;
+            if(val >= 1) input.value = val;
+        }
+
+        // Kosárba rakás MENNYISÉGGEL és MÉRETTEL együtt
+        function addDetailToCart() {
+            let qty = parseInt(document.getElementById('detail-qty').value);
+            
+            // Okos azonosító: Hozzáfűzzük a méretet az ID-hoz és a Névhez is!
+            let finalId = '1-' + selectedSize; 
+            let finalName = 'Premium Pamut Póló - Méret: ' + selectedSize;
+
+            for(let i=0; i<qty; i++) {
+                addToCart(finalId, finalName, 8990, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600');
+            }
+            
+            // Értesítés, ami ki is írja a méretet
+            showToast(qty + " db bekerült a kosárba (" + selectedSize + " méret)!");
+        }
+    </script>
+</body>
+</html>

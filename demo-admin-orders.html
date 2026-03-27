@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendelések | Admin Demó</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő B2B CMS / Admin Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+<div class="sidebar">
+        <div class="sidebar-logo">Lumina<span>Admin</span></div>
+        <div class="sidebar-menu">
+            <a href="demo-admin.html" class="menu-item"><i class="fas fa-chart-pie"></i> <span>Vezérlőpult</span></a>
+            <a href="demo-admin-orders.html" class="menu-item"><i class="fas fa-shopping-cart"></i> <span>Rendelések</span></a>
+            <a href="demo-admin-customers.html" class="menu-item"><i class="fas fa-users"></i> <span>Ügyfelek</span></a>
+            <a href="demo-admin-products.html" class="menu-item"><i class="fas fa-box"></i> <span>Termékek</span></a>
+            <a href="demo-admin-restock.html" class="menu-item"><i class="fas fa-truck-loading"></i> <span>Berendelés</span></a>
+            
+            <div style="flex-grow: 1;"></div>
+            
+            <a href="demo-admin-settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>Beállítások</span></a>
+            <a href="index.html" class="menu-item" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> <span>Kijelentkezés</span></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-header">
+            <h2 class="page-title">Rendelések Kezelése</h2>
+<div class="header-actions">
+    <div class="profile-menu-container">
+        <div class="admin-profile" onclick="toggleProfileMenu()">
+            <span>Kiss Péter</span>
+            <img src="https://ui-avatars.com/api/?name=Kiss+Peter&background=3b82f6&color=fff" alt="Admin">
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px; color: var(--admin-muted);"></i>
+        </div>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+                <strong>Kiss Péter</strong>
+                <p>admin@pelda.hu</p>
+            </div>
+            <hr>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-user-circle"></i> Fiókom
+            </a>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Beállítások
+            </a>
+            <div class="dropdown-item" onclick="toggleAdminTheme()">
+                <i id="dropdown-theme-icon" class="fas fa-moon"></i> Éjszakai Mód 
+                <span id="dropdown-theme-text" style="margin-left:auto; font-size:12px; color:var(--admin-muted); font-weight:700;">Ki</span>
+            </div>
+            <hr>
+            <a href="index.html" class="dropdown-item text-danger">
+                <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div class="content-pad">
+            <div class="table-card">
+            <div class="table-header" style="display: flex; gap: 15px; background: var(--admin-bg); align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; position: relative; min-width: 250px;">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--admin-muted);"></i>
+                    <input type="text" id="order-search" onkeyup="filterOrders()" class="form-control" placeholder="Keresés ID vagy név alapján..." style="padding-left: 40px; margin: 0; background: var(--admin-card);">
+                </div>
+                <select id="order-status-filter" onchange="filterOrders()" class="form-control" style="width: auto; margin: 0; background: var(--admin-card);">
+                    <option value="Minden státusz">Minden státusz</option>
+                    <option value="Feldolgozás alatt">Feldolgozás alatt</option>
+                    <option value="Teljesítve">Teljesítve</option>
+                    <option value="Visszatérítve">Visszatérítve</option>
+                </select>
+                
+                <button class="btn-primary" onclick="openAddOrderModal()" style="margin: 0; background: var(--admin-success);"><i class="fas fa-plus"></i> Új rendelés</button>
+                
+                <button class="btn-primary" onclick="exportRealCSV(this)" style="margin: 0;"><i class="fas fa-file-export"></i> CSV Export</button>
+            </div>
+
+                <table class="admin-table" id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Rendelés ID</th>
+                            <th>Dátum</th>
+                            <th>Ügyfél</th>
+                            <th>Termékek</th>
+                            <th>Összeg</th>
+                            <th>Státusz</th>
+                            <th>Művelet</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <tr><td><strong>#ORD-8930</strong></td><td>Ma, 15:40</td><td>Mészáros Dávid</td><td>1x Midnight Óra</td><td>65 990 Ft</td><td><span class="status-badge status-pending">Feldolgozás alatt</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8930', 'Mészáros Dávid', '65 990 Ft', 'Feldolgozás alatt', '1x Midnight Chronograph Óra', '1051 Budapest, Példa utca 1.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8929</strong></td><td>Ma, 14:02</td><td>Tóth Gergő</td><td>1x Premium Pamut Póló</td><td>8 990 Ft</td><td><span class="status-badge status-pending">Feldolgozás alatt</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8929', 'Tóth Gergő', '8 990 Ft', 'Feldolgozás alatt', '1x Premium Pamut Póló (M)', '9024 Győr, Kossuth Lajos u. 12.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8928</strong></td><td>Ma, 11:10</td><td>Szilágyi Emma</td><td>2x Canvas Tote Táska</td><td>25 000 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8928', 'Szilágyi Emma', '25 000 Ft', 'Teljesítve', '2x Canvas Tote Táska', '4028 Debrecen, Fő tér 5.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8927</strong></td><td>Ma, 10:42</td><td>Nagy Anna</td><td>1x Bőrkabát Classic</td><td>45 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8927', 'Nagy Anna', '45 990 Ft', 'Teljesítve', '1x Bőrkabát Classic (S)', '1113 Budapest, Karolina út 45.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8926</strong></td><td>Ma, 08:15</td><td>Kovács Zoltán</td><td>1x Napszemüveg Aviator</td><td>24 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8926', 'Kovács Zoltán', '24 990 Ft', 'Teljesítve', '1x Napszemüveg Aviator', '6720 Szeged, Dóm tér 2.')"><i class="fas fa-eye"></i></button></td></tr>
+                        
+                        <tr><td><strong>#ORD-8925</strong></td><td>Tegnap, 18:00</td><td>Farkas Bence</td><td>1x Minimalista Sneaker</td><td>42 990 Ft</td><td><span class="status-badge" style="background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid #ef4444;">Visszatérítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8925', 'Farkas Bence', '42 990 Ft', 'Visszatérítve', '1x Minimalista Sneaker (42)', '7621 Pécs, Király utca 14.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8924</strong></td><td>Tegnap, 16:30</td><td>Tóth Béla</td><td>2x Midnight Óra</td><td>131 980 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8924', 'Tóth Béla', '131 980 Ft', 'Teljesítve', '2x Midnight Chronograph Óra', '3530 Miskolc, Széchenyi u. 8.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8923</strong></td><td>Tegnap, 14:20</td><td>Szabó Kitti</td><td>1x Napszemüveg Aviator</td><td>24 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8923', 'Szabó Kitti', '24 990 Ft', 'Teljesítve', '1x Napszemüveg Aviator', '8000 Székesfehérvár, Fő utca 21.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8922</strong></td><td>Tegnap, 10:15</td><td>Horváth Máté</td><td>3x Pamut Póló</td><td>26 970 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8922', 'Horváth Máté', '26 970 Ft', 'Teljesítve', '3x Premium Pamut Póló (L)', '9700 Szombathely, Fő tér 3.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8921</strong></td><td>2026.03.04.</td><td>Varga István</td><td>1x Minimalista Sneaker</td><td>42 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8921', 'Varga István', '42 990 Ft', 'Teljesítve', '1x Minimalista Sneaker (44)', '6000 Kecskemét, Rákóczi út 10.')"><i class="fas fa-eye"></i></button></td></tr>
+
+                        <tr><td><strong>#ORD-8920</strong></td><td>2026.03.04.</td><td>Kiss Viktória</td><td>1x Bőrkabát Classic</td><td>45 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8920', 'Kiss Viktória', '45 990 Ft', 'Teljesítve', '1x Bőrkabát Classic (M)', '4400 Nyíregyháza, Kossuth tér 1.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8919</strong></td><td>2026.03.03.</td><td>Papp Zsófia</td><td>1x Tote Táska</td><td>12 500 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8919', 'Papp Zsófia', '12 500 Ft', 'Teljesítve', '1x Canvas Tote Táska', '5600 Békéscsaba, Andrássy út 4.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8918</strong></td><td>2026.03.03.</td><td>Balogh Tamás</td><td>1x Midnight Óra</td><td>65 990 Ft</td><td><span class="status-badge" style="background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid #ef4444;">Visszatérítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8918', 'Balogh Tamás', '65 990 Ft', 'Visszatérítve', '1x Midnight Chronograph Óra', '8900 Zalaegerszeg, Mártírok útja 11.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8917</strong></td><td>2026.03.02.</td><td>Kocsis Laura</td><td>2x Napszemüveg</td><td>49 980 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8917', 'Kocsis Laura', '49 980 Ft', 'Teljesítve', '2x Napszemüveg Aviator', '3300 Eger, Dobó István tér 2.')"><i class="fas fa-eye"></i></button></td></tr>
+                        <tr><td><strong>#ORD-8916</strong></td><td>2026.03.01.</td><td>Fehér Lajos</td><td>1x Pamut Póló</td><td>8 990 Ft</td><td><span class="status-badge status-success">Teljesítve</span></td><td><button class="action-btn" onclick="openOrderDetails('#ORD-8916', 'Fehér Lajos', '8 990 Ft', 'Teljesítve', '1x Premium Pamut Póló (XL)', '5000 Szolnok, Baross utca 15.')"><i class="fas fa-eye"></i></button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; color: var(--admin-muted); font-size: 14px;">
+                <span id="pagination-info">Mutatva: 1 - 5 (Összesen: 15 rendelés)</span>
+                <div style="display: flex; gap: 5px;" id="pagination-controls">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+<div class="admin-modal" id="delete-confirm-modal" style="z-index: 6000;">
+        <div class="modal-content" style="max-width: 400px; text-align: center; padding: 30px;">
+            <div style="font-size: 45px; color: var(--admin-danger); margin-bottom: 15px;">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3 style="margin-bottom: 10px; color: var(--admin-text);">Biztosan törlöd?</h3>
+            <p style="color: var(--admin-muted); font-size: 14px; margin-bottom: 25px;">Ez a művelet visszavonhatatlan. A rendelés véglegesen törlődik a rendszerből.</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="action-btn" onclick="closeDeleteConfirmModal()" style="width: 50%;">Mégse</button>
+                <button class="btn-danger" onclick="executeOrderDeletion()" style="width: 50%;">Igen, törlöm</button>
+            </div>
+        </div>
+    </div>
+
+<div class="admin-modal" id="order-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Rendelés Részletei
+                <button class="modal-close" onclick="closeOrderDetails()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                    <div>
+                        <p style="font-size: 12px; color: var(--admin-muted); text-transform: uppercase; margin-bottom: 5px;">Rendelés ID</p>
+                        <h3 id="modal-order-id" style="font-size: 18px; color: var(--admin-text);">#ORD-0000</h3>
+                    </div>
+                    <div style="text-align: right; display: flex; align-items: flex-end; gap: 10px;">
+                        <div style="text-align: left;">
+                            <p style="font-size: 12px; color: var(--admin-muted); text-transform: uppercase; margin-bottom: 5px;">Státusz szerkesztése</p>
+                            <select id="modal-order-status-select" class="form-control" onchange="applyStatusColorToSelect(this, this.value)" style="font-weight: bold; font-size: 13px; padding: 6px 10px; width: 150px; cursor: pointer; border-width: 2px;">
+                                <option value="Feldolgozás alatt">Feldolgozás alatt</option>
+                                <option value="Teljesítve">Teljesítve</option>
+                                <option value="Visszatérítve">Visszatérítve</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" onclick="updateOrderStatus()" style="padding: 7px 15px; font-size: 13px;" title="Státusz mentése"><i class="fas fa-save"></i></button>
+                    </div>
+                </div>
+
+                <div class="inner-box" style="background: var(--admin-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 20px; position: relative;">
+                    <button onclick="toggleEditCustomerInfo()" style="position: absolute; top: 12px; right: 12px; background: none; border: none; color: var(--admin-primary); cursor: pointer; font-size: 13px; font-weight: 600;"><i class="fas fa-edit"></i> Szerkesztés</button>
+                    
+                    <div id="order-info-view">
+                        <p style="font-size: 13px; margin-bottom: 8px;"><strong>Ügyfél neve:</strong> <span id="modal-order-customer">Név</span></p>
+                        <p style="font-size: 13px; margin-bottom: 8px;"><strong>Szállítási cím:</strong> <span id="modal-order-address" style="color: var(--admin-primary); font-weight: 600;">Cím</span></p>
+                        <p style="font-size: 13px; margin-bottom: 8px;"><strong>Fizetési mód:</strong> <span id="modal-order-payment">Bankkártya (Stripe)</span></p>
+                        <p style="font-size: 13px;"><strong>Futár:</strong> <span id="modal-order-courier">GLS Futárszolgálat</span></p>
+                    </div>
+
+                    <div id="order-info-edit" style="display: none; padding-top: 25px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                            <div>
+                                <label style="font-size: 11px; color: var(--admin-muted); font-weight: 600;">Ügyfél neve</label>
+                                <input type="text" id="edit-order-customer" class="form-control" style="padding: 8px; font-size: 13px;">
+                            </div>
+                            <div>
+                                <label style="font-size: 11px; color: var(--admin-muted); font-weight: 600;">Szállítási cím</label>
+                                <input type="text" id="edit-order-address" class="form-control" style="padding: 8px; font-size: 13px;">
+                            </div>
+                            <div>
+                                <label style="font-size: 11px; color: var(--admin-muted); font-weight: 600;">Fizetési mód</label>
+                                <select id="edit-order-payment" class="form-control" style="padding: 8px; font-size: 13px;">
+                                    <option value="Bankkártya (Stripe)">Bankkártya (Stripe)</option>
+                                    <option value="Utánvét (Készpénz/Kártya)">Utánvét (Készpénz/Kártya)</option>
+                                    <option value="Előre utalás">Előre utalás</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="font-size: 11px; color: var(--admin-muted); font-weight: 600;">Futárszolgálat</label>
+                                <select id="edit-order-courier" class="form-control" style="padding: 8px; font-size: 13px;">
+                                    <option value="GLS Futárszolgálat">GLS Futárszolgálat</option>
+                                    <option value="DPD Futárszolgálat">DPD Futárszolgálat</option>
+                                    <option value="MPL (Magyar Posta)">MPL (Magyar Posta)</option>
+                                    <option value="Foxpost Automata">Foxpost Automata</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-primary" onclick="saveCustomerInfoEdit()" style="padding: 6px 12px; font-size: 12px;"><i class="fas fa-check"></i> Mentés</button>
+                            <button class="action-btn" onclick="toggleEditCustomerInfo()" style="padding: 6px 12px; font-size: 12px;">Mégse</button>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="font-size: 14px; margin-bottom: 10px; color: var(--admin-text);">Rendelt Tételek</h4>
+                <div style="border-bottom: 1px solid var(--admin-border); padding-bottom: 15px; margin-bottom: 15px; font-size: 14px; color: var(--admin-text);" id="modal-order-items"></div>
+
+                <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; color: var(--admin-text);">
+                    <span>Végösszeg:</span>
+                    <span id="modal-order-total">0 Ft</span>
+                </div>
+            </div>
+            <div style="padding: 15px 25px; border-top: 1px solid var(--admin-border); background: var(--admin-bg); border-radius: 0 0 12px 12px; display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn-danger" onclick="openDeleteConfirmModal()" style="padding: 8px 15px; font-size: 13px;"><i class="fas fa-trash"></i> Rendelés törlése</button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="action-btn" onclick="closeOrderDetails()">Bezárás</button>
+                    <button class="btn-primary" onclick="closeOrderDetails(); showAdminToast('Számla újraküldve az ügyfélnek!', '#10b981')">Számla küldése</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="add-order-modal">
+        <div class="modal-content" style="max-width: 600px;"> 
+            <div class="modal-header">
+                Új Rendelés Létrehozása
+                <button class="modal-close" onclick="closeAddOrderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="new-order-form" onsubmit="addNewOrder(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Ügyfél neve</label>
+                            <input type="text" id="new-order-customer" class="form-control" placeholder="pl. Kovács Zoltán" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Szállítási cím</label>
+                            <input type="text" id="new-order-address" class="form-control" placeholder="pl. 1051 Bp, Váci út 1." required>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Fizetési mód</label>
+                            <select id="new-order-payment" class="form-control">
+                                <option value="Bankkártya (Stripe)">Bankkártya (Stripe)</option>
+                                <option value="Utánvét (Készpénz/Kártya)">Utánvét (Készpénz/Kártya)</option>
+                                <option value="Előre utalás">Előre utalás</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Futárszolgálat</label>
+                            <select id="new-order-courier" class="form-control">
+                                <option value="GLS Futárszolgálat">GLS Futárszolgálat</option>
+                                <option value="DPD Futárszolgálat">DPD Futárszolgálat</option>
+                                <option value="MPL (Magyar Posta)">MPL (Magyar Posta)</option>
+                                <option value="Foxpost Automata">Foxpost Automata</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <hr style="border: none; border-top: 1px solid var(--admin-border); margin: 10px 0 20px;">
+                    
+                    <label style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--admin-text); margin-bottom: 10px;">
+                        <span>Rendelt tételek</span>
+                        <span style="font-weight: normal; color: var(--admin-muted); font-size: 11px;">(Húzd a bal szélén a sorrendhez)</span>
+                    </label>
+                    
+                    <div id="order-items-container"></div>
+                    
+                    <template id="item-row-template">
+                        <div class="order-item-row" draggable="true" style="display: grid; grid-template-columns: auto 3fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px; background: var(--admin-bg); padding: 8px; border-radius: 8px; border: 1px solid var(--admin-border); transition: 0.2s;">
+                            <div class="drag-handle" style="cursor: grab; color: var(--admin-muted); padding: 0 5px;"><i class="fas fa-grip-vertical"></i></div>
+                            <div>
+                                <select class="form-control item-product" required onchange="calculateNewOrderTotal()">
+                                    <option value="" disabled selected>-- Válassz terméket --</option>
+                                    <option value="65990" data-name="Midnight Chronograph Óra">Midnight Óra (65 990 Ft)</option>
+                                    <option value="8990" data-name="Premium Pamut Póló">Premium Pamut Póló (8 990 Ft)</option>
+                                    <option value="12500" data-name="Canvas Tote Táska">Canvas Tote Táska (12 500 Ft)</option>
+                                    <option value="45990" data-name="Bőrkabát Classic">Bőrkabát Classic (45 990 Ft)</option>
+                                    <option value="42990" data-name="Minimalista Sneaker">Minimalista Sneaker (42 990 Ft)</option>
+                                </select>
+                            </div>
+                            <div><input type="number" class="form-control item-qty" min="1" value="1" required oninput="calculateNewOrderTotal()"></div>
+                            <div><button type="button" class="action-btn remove-row-btn" style="margin: 0; color: var(--admin-danger); border-color: var(--admin-danger);" onclick="removeOrderItemRow(this)"><i class="fas fa-trash"></i></button></div>
+                        </div>
+                    </template>
+                    
+                    <button type="button" class="action-btn" style="width: 100%; border: 1px dashed var(--admin-primary); color: var(--admin-primary); background: transparent; margin-bottom: 20px; padding: 10px;" onclick="addOrderItemRow()">+ Új tétel hozzáadása</button>
+
+                    <div class="form-group">
+                        <label>Összesen fizetendő</label>
+                        <input type="text" id="new-order-total" class="form-control" placeholder="0 Ft" readonly style="background: var(--admin-table-hover); font-weight: bold; color: var(--admin-primary); border-color: transparent;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Egyéb megjegyzés (opcionális)</label>
+                        <textarea id="new-order-notes" class="form-control" rows="2" placeholder="Különleges kérések..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Kezdeti Státusz</label>
+                        <select id="new-order-status" class="form-control">
+                            <option value="Feldolgozás alatt">Feldolgozás alatt</option>
+                            <option value="Teljesítve">Teljesítve</option>
+                            <option value="Visszatérítve">Visszatérítve</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;"><i class="fas fa-save"></i> Rendelés elmentése</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="admin-toast"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

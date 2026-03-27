@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Sikeres Rendelés | Webshop Demó</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar" style="justify-content: space-between;">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-actions">
+            <button class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+
+    <div class="container" style="text-align: center; padding-top: 100px; max-width: 600px;">
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h1 style="font-size: 40px; margin-bottom: 15px; font-weight: 900; letter-spacing: -1px;">Köszönjük a rendelést!</h1>
+        <p style="font-size: 18px; color: #475569; margin-bottom: 40px; line-height: 1.6;">
+            A fizetés sikeres volt. A visszaigazolást és a számlát elküldtük az email címedre. Rendelési azonosító: <strong style="color: var(--shop-black);">#ORD-8924A</strong>
+        </p>
+        <a href="demo-webshop.html" class="btn-dark" style="width: auto; padding: 15px 40px;">Vissza a főoldalra</a>
+    </div>
+
+    <div id="toast"></div>
+    <script src="shop.js"></script>
+</body>
+</html>

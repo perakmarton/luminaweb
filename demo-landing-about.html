@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Rólunk | SaaS Landing Demó</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-bar">Élő SaaS Landing Demó <a href="index.html">← Vissza a portfólióhoz</a></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><a href="demo-landing.html">Task<span>Flow</span></a></div>
+            <div class="nav-links">
+                <a href="demo-landing-features.html" class="menu-link">Funkciók</a>
+                <a href="demo-landing-pricing.html" class="menu-link">Árak</a>
+                <a href="demo-landing-about.html" class="menu-link">Rólunk</a>
+                <div style="width: 1px; height: 20px; background: var(--saas-border); margin: 0 10px;"></div>
+                <button onclick="openModal('login')" class="login-btn">Bejelentkezés</button>
+                <button onclick="openModal('register')" class="btn-primary" style="padding: 10px 20px;">Próbáld ki ingyen</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-glow"></div>
+
+    <div class="page-header">
+        <h1>A jövő munkahelyét építjük</h1>
+        <p>A TaskFlow-t 2023-ban alapítottuk azzal a küldetéssel, hogy megszabadítsuk az embereket a robotmunkától, és visszaadjuk nekik a kreativitás örömét.</p>
+    </div>
+
+    <div class="team-grid">
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200" alt="CEO">
+            <h3>Kovács Márk</h3>
+            <p>Alapító & CEO</p>
+            <div style="color: var(--saas-muted);"><i class="fab fa-linkedin" style="font-size: 20px; cursor: pointer;"></i></div>
+        </div>
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200" alt="CTO">
+            <h3>Tóth Zsófia</h3>
+            <p>Technológiai Igazgató (CTO)</p>
+            <div style="color: var(--saas-muted);"><i class="fab fa-linkedin" style="font-size: 20px; cursor: pointer;"></i></div>
+        </div>
+        <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200" alt="Lead Designer">
+            <h3>Varga Roman</h3>
+            <p>Vezető Designer</p>
+            <div style="color: var(--saas-muted);"><i class="fab fa-linkedin" style="font-size: 20px; cursor: pointer;"></i></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">Bejelentkezés</h2>
+                <p id="modalDesc">Jelentkezz be a folytatáshoz.</p>
+            </div>
+
+            <button class="btn-google" id="modalGoogleBtn">
+                <i class="fab fa-google" style="color: #ea4335; font-size: 16px;"></i> Folytatás Google fiókkal
+            </button>
+            
+            <div class="divider" id="modalDivider">vagy email címmel</div>
+
+            <div id="nameGroup" class="form-group" style="display: none;">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Teljes név">
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email cím">
+            </div>
+            
+            <div id="passwordGroup">
+                <div class="form-group" style="margin-bottom: 8px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Jelszó">
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" onclick="openModal('forgot')" style="color: var(--saas-primary); font-size: 12px; font-weight: 600; text-decoration: none;">Elfelejtetted a jelszavad?</a>
+                </div>
+            </div>
+            
+            <button id="modalSubmitBtn" class="btn-primary" style="width: 100%;" onclick="submitForm()">Tovább</button>
+
+            <div class="modal-footer" id="modalFooter">
+                Nincs még fiókod? <a onclick="openModal('register')">Regisztrálj!</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="saas-toast"></div>
+    <script src="landing.js"></script>
+</body>
+</html>

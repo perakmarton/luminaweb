@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Webshop Demó | Minden Termék</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-links">
+            <a href="demo-webshop.html" class="active">Minden Termék</a>
+            <a href="demo-ruhazat.html">Ruházat</a>
+            <a href="demo-kiegeszitok.html">Kiegészítők</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon">
+                <i class="fas fa-shopping-bag" style="font-size: 18px;"></i>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Teljes Kollekció</h1>
+            <p>Fedezd fel a legújabb letisztult darabokat.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Összes Termék</h2>
+        
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <a href="demo-product.html">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600" class="product-img" alt="Premium Pamut Póló">
+                    </a>
+                    <div class="add-to-cart-overlay" onclick="openCartModal(1, 'Premium Pamut Póló', 8990, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600', true)">+ Kosárba teszem</div>
+                </div>
+                <a href="demo-product.html">
+                    <h3 class="product-title">Premium Pamut Póló</h3>
+                </a>
+                <p class="product-price">8 990 Ft</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600" class="product-img" alt="Bőrkabát Classic">
+                    <div class="add-to-cart-overlay" onclick="openCartModal(2, 'Bőrkabát Classic', 45990, 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600', true)">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Bőrkabát Classic</h3>
+                <p class="product-price">45 990 Ft</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600" class="product-img" alt="Midnight Chronograph Óra">
+                    <div class="add-to-cart-overlay" onclick="openCartModal(3, 'Midnight Chronograph Óra', 65990, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600', false)">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Midnight Chronograph Óra</h3>
+                <p class="product-price">65 990 Ft</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600" class="product-img" alt="Napszemüveg Aviator">
+                    <div class="add-to-cart-overlay" onclick="openCartModal(4, 'Napszemüveg Aviator', 24990, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600', false)">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Napszemüveg Aviator</h3>
+                <p class="product-price">24 990 Ft</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600" class="product-img" alt="Minimalista Sneaker">
+                    <div class="add-to-cart-overlay" onclick="openCartModal(5, 'Minimalista Sneaker', 42990, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600', true)">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Minimalista Sneaker</h3>
+                <p class="product-price">42 990 Ft</p>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=600" class="product-img" alt="Canvas Tote Táska">
+                    <div class="add-to-cart-overlay" onclick="openCartModal(6, 'Canvas Tote Táska', 12500, 'https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=600', false)">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Canvas Tote Táska</h3>
+                <p class="product-price">12 500 Ft</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="size-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCartModal()">&times;</button>
+            <h3 id="modal-title" style="margin-top: 0; font-size: 22px; color: var(--text-main);">Termék neve</h3>
+            <p id="modal-price" style="color: var(--shop-blue); font-weight: bold; font-size: 18px;">0 Ft</p>
+            
+            <p style="margin: 20px 0 10px; font-size: 14px; font-weight: 600; color: var(--text-main);">Válassz méretet:</p>
+            <div class="modal-size-grid">
+                <button class="modal-size-btn" data-size="S" onclick="selectModalSize('S', this)">S</button>
+                <button class="modal-size-btn active" data-size="M" onclick="selectModalSize('M', this)">M</button>
+                <button class="modal-size-btn" data-size="L" onclick="selectModalSize('L', this)">L</button>
+                <button class="modal-size-btn" data-size="XL" onclick="selectModalSize('XL', this)">XL</button>
+            </div>
+            
+            <button class="btn-dark" style="margin-top: 10px; width: 100%;" onclick="confirmAddToCart()">Hozzáadás a kosárhoz</button>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="shop.js"></script>
+</body>
+</html>

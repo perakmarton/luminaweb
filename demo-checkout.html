@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Pénztár | Webshop Demo</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-actions">
+            <button class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon" style="margin-left: 10px; font-size: 14px;">
+                ← Vissza a kosárhoz
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title">Pénztár</h1>
+        
+        <div class="checkout-grid">
+            <div>
+                <div>
+                    <h3 class="checkout-section-title">Kapcsolati adatok</h3>
+                    <div class="form-group">
+                        <label>Email cím *</label>
+                        <input type="email" id="email" class="form-control" placeholder="pelda@email.hu">
+                        <div class="error-msg">Érvényes email cím megadása kötelező.</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <h3 class="checkout-section-title">Szállítási cím</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vezetéknév *</label>
+                            <input type="text" id="last-name" class="form-control" placeholder="Kovács">
+                            <div class="error-msg">Kötelező mező.</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Keresztnév *</label>
+                            <input type="text" id="first-name" class="form-control" placeholder="Péter">
+                            <div class="error-msg">Kötelező mező.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Utca, házszám *</label>
+                        <input type="text" id="address" class="form-control" placeholder="Kossuth Lajos u. 10.">
+                        <div class="error-msg">Kötelező mező.</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Város *</label>
+                            <input type="text" id="city" class="form-control" placeholder="Budapest">
+                            <div class="error-msg">Kötelező mező.</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Irányítószám *</label>
+                            <input type="text" id="zip" class="form-control" placeholder="1055">
+                            <div class="error-msg">Kötelező mező.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <h3 class="checkout-section-title">Fizetés</h3>
+                    <p style="font-size: 13px; color: var(--shop-muted); margin-bottom: 20px;"><i class="fas fa-lock"></i> A tranzakció SSL protokollal titkosított.</p>
+                    
+                    <div class="payment-box">
+                        <div class="form-group input-with-icon">
+                            <label>Kártyaszám *</label>
+                            <img id="card-icon" class="card-icon-img" src="https://cdn-icons-png.flaticon.com/512/1086/1086741.png" alt="">
+                            <input type="text" id="cc-number" class="form-control" placeholder="0000-0000-0000-0000">
+                            <div class="error-msg">Érvénytelen kártyaszám.</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Lejárat (HH/ÉÉ) *</label>
+                                <input type="text" id="cc-exp" class="form-control" placeholder="MM/YY">
+                                <div class="error-msg">Hibás dátum.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>CVC *</label>
+                                <input type="text" id="cc-cvc" class="form-control" placeholder="123">
+                                <div class="error-msg">Hibás CVC.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="pay-btn" class="btn-dark" style="margin-top: 30px; padding: 20px; font-size: 18px;" onclick="simulatePayment()">Fizetés és Megrendelés</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="cart-summary">
+                    <h3 style="margin-top: 0; border-bottom: 1px solid var(--shop-border); padding-bottom: 15px; margin-bottom: 20px;">Összegzés</h3>
+                    
+                    <div id="checkout-summary-items"></div>
+                    
+                    <div class="coupon-box">
+                        <input type="text" id="coupon-code" class="coupon-input" placeholder="Kuponkód (pl. ADMIN)">
+                        <button class="coupon-btn" onclick="applyCoupon()">Alkalmaz</button>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--shop-border); margin: 20px 0;">
+                    
+                    <div style="display:flex; justify-content:space-between; font-size: 15px; margin-bottom: 10px; color: var(--shop-muted);">
+                        <span>Részösszeg</span><span id="checkout-subtotal">0 Ft</span>
+                    </div>
+                    
+                    <div id="discount-row" class="discount-row">
+                        <span>Kedvezmény (Kupon)</span><span id="discount-amount">-0 Ft</span>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; font-size: 15px; margin-bottom: 20px; color: var(--shop-muted);">
+                        <span>Szállítás</span><span style="color: #10b981; font-weight: bold;">Ingyenes</span>
+                    </div>
+                    
+                    <div style="display:flex; justify-content:space-between; font-size: 24px; font-weight: 900; align-items: center; padding-top: 15px; border-top: 1px solid var(--shop-border);">
+                        <span>Összesen</span>
+                        <span id="checkout-final-total" style="color: var(--shop-blue);">0 Ft</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="shop.js"></script>
+</body>
+</html>

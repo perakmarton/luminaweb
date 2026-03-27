@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuminaWeb | Ügyfélszerző Weboldalak</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+    <div class="top-bar">
+        <strong>🚀 Portfólióépítő Akció!</strong> Az első 5 ügyfelemnek 50% kedvezményt biztosítok. Ne maradj le!
+    </div>
+
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo"><a href="index.html#kezdolap">LuminaWeb</a></div>
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#home">Kezdőlap</a></li>
+                    <li><a href="#szolgaltatasok">Szolgáltatások</a></li>
+                    <li><a href="#demok">Demók</a></li>
+                    <li><a href="#arak">Árak</a></li>
+                    <li><a href="#gyik">Gy.I.K.</a></li>
+                </ul>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                     <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+                    <a href="#kapcsolat" class="btn nav-btn">Ajánlatot kérek</a>
+                </div>
+            </nav>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container fade-in">
+            <h1>Ügyfélszerző Weboldalak <br><span>Vállalkozásoknak</span></h1>
+            <p>Ne elégedjen meg egy egyszerű digitális névjegykártyával. Olyan modern rendszert építek, ami ügyfeleket hoz.</p>
+            <div class="hero-buttons">
+                <a href="#kapcsolat" class="btn"><i class="fas fa-rocket"></i> Kérem az ajánlatot</a>
+                <a href="#demok" class="btn btn-outline">Demók megtekintése</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="rolam" class="section-bg">
+        <div class="container grid-2">
+            <div class="slide-in-left">
+                <h2>Nem csak kódolok, <br>üzletet építek.</h2>
+                <p>Webfejlesztéssel foglalkozom, célom, hogy vállalkozások számára modern és eredményorientált online jelenlétet építsek. A látogatókból vásárlókat faragunk.</p>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <h3>100%</h3>
+                        <p>Mobilbarát</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>99+</h3>
+                        <p>Google PageSpeed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-card slide-in-right">
+                <h3 style="margin-bottom: 20px;">Miért engem válasszon?</h3>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle"></i> Modern, trendkövető UX/UI design</li>
+                    <li><i class="fas fa-check-circle"></i> Villámgyors betöltési sebesség</li>
+                    <li><i class="fas fa-check-circle"></i> Beépített alap SEO beállítások</li>
+                    <li><i class="fas fa-check-circle"></i> Gyors és transzparens kommunikáció</li>
+                    <li><i class="fas fa-check-circle"></i> SSL és maximális biztonság</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="szolgaltatasok">
+        <div class="container">
+            <h2 class="section-title fade-in">Szolgáltatások</h2>
+            <div class="section-divider fade-in"></div>
+            <div class="grid-3">
+                <div class="card fade-up">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Céges weboldal</h3>
+                    <p>Bizalomépítő, professzionális bemutatkozó oldalak kis- és középvállalkozásoknak letisztult designnal.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay: 0.1s;">
+                    <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Landing oldal</h3>
+                    <p>Egy adott termékre vagy szolgáltatásra fókuszáló, magas konverziójú oldalak hirdetésekhez.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay: 0.2s;">
+                    <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Webshop fejlesztés</h3>
+                    <p>Felhasználóbarát, biztonságos e-kereskedelmi megoldások, bankkártyás fizetés integrációval.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demok" class="section-bg">
+        <div class="container">
+            <h2 class="section-title fade-in">Nézze meg élőben a demókat!</h2>
+            <div class="section-divider fade-in"></div>
+            <div class="grid-3">
+                <div class="card fade-up" style="text-align: center;">
+                    <i class="fas fa-rocket" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Landing Page Demó</h3>
+                    <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">Egy termékes, konverzióra optimalizált értékesítési oldal.</p>
+                    <a href="demo-landing.html" target="_blank" class="btn btn-outline" style="width: 100%;">Élő Demó Megtekintése</a>
+                </div>
+                <div class="card fade-up" style="text-align: center; transition-delay: 0.1s;">
+                    <i class="fas fa-chart-pie" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Admin Dashboard</h3>
+                    <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">Egyedi belső rendszer és statisztikai felület adatokhoz.</p>
+                    <a href="demo-admin.html" target="_blank" class="btn btn-outline" style="width: 100%;">Élő Demó Megtekintése</a>
+                </div>
+                <div class="card fade-up" style="text-align: center; transition-delay: 0.2s;">
+                    <i class="fas fa-shopping-bag" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Webshop Demó</h3>
+                    <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">Komplett e-kereskedelmi felület termékrácsokkal.</p>
+                    <a href="demo-webshop.html" target="_blank" class="btn btn-outline" style="width: 100%;">Élő Demó Megtekintése</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arak">
+        <div class="container">
+            <h2 class="section-title fade-in">Csomagok és Árak</h2>
+            <div class="section-divider fade-in"></div>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-up">
+                    <h3>Start Csomag</h3>
+                    <div class="price">Kérj ajánlatot</div>
+                    <div class="desc">Induló vállalkozóknak</div>
+                    <hr>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 1-3 oldalas bemutatkozó</li>
+                        <li><i class="fas fa-check"></i> Kapcsolati űrlap</li>
+                        <li><i class="fas fa-check"></i> Reszponzív design</li>
+                    </ul>
+                    <a href="csomag-start.html" class="btn-blue-outline">Részletek megtekintése</a>
+                </div>
+
+                <div class="pricing-card popular fade-up" style="transition-delay: 0.1s;">
+                    <div class="pricing-badge">Legnépszerűbb</div>
+                    <h3>Pro Biznisz</h3>
+                    <div class="price">Kérj ajánlatot</div>
+                    <div class="desc">Kkv-k számára</div>
+                    <hr>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 5-10 oldalas weboldal</li>
+                        <li><i class="fas fa-check"></i> Egyedi design & animációk</li>
+                        <li><i class="fas fa-check"></i> SEO alapok & Analytics</li>
+                        <li><i class="fas fa-check"></i> Admin felület (CMS)</li>
+                    </ul>
+                    <a href="csomag-premium.html" class="btn">Részletek megtekintése</a>
+                </div>
+
+                <div class="pricing-card fade-up" style="transition-delay: 0.2s;">
+                    <h3>E-kereskedelem</h3>
+                    <div class="price">Egyedi árazás</div>
+                    <div class="desc">Webáruházaknak</div>
+                    <hr>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Teljes webshop rendszer</li>
+                        <li><i class="fas fa-check"></i> Bankkártyás fizetés (Stripe)</li>
+                        <li><i class="fas fa-check"></i> Számlázó integráció</li>
+                    </ul>
+                    <a href="csomag-egyedi.html" class="btn-blue-outline">Részletek megtekintése</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-bg">
+        <div class="container fade-in">
+            <h2 class="section-title">Gyakori Kérdések</h2>
+            <div class="section-divider"></div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">Mennyi idő alatt készül el egy weboldal? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Egy alap  oldal 1-2 hét alatt elkészülhet. Egy összetettebb, egyedi funkciókkal vagy webshoppal rendelkező oldal 3-4 hetet is igénybe vehet.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Magam is tudom majd szerkeszteni a tartalmat? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Igen! A legtöbb projektet könnyen tudod kezelni, és egy rövid betanítást is tartok.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kapcsolat">
+        <div class="container">
+            <h2 class="section-title fade-in">Kérjen Ajánlatot</h2>
+            <div class="section-divider fade-in" style="background: var(--primary);"></div>
+
+            <div class="contact-wrapper">
+                <div class="form-side slide-in-left">
+                    <form id="myContactForm" action="https://formspree.io/f/xreadvev" method="POST">
+                        <div class="grid-2" style="gap: 20px;">
+                            <div class="form-group">
+                                <label>Név vagy Cégnév *</label>
+                                <input type="text" name="Nev" class="form-control" placeholder="Pl. Kiss Péter / Minta Kft." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email cím *</label>
+                                <input type="email" name="Email" class="form-control" placeholder="peter@cegem.hu" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group selector-group">
+                            <label>Milyen szolgáltatásra van szüksége?</label>
+                            <input type="hidden" name="Szolgaltatas" value="Bemutatkozó oldal">
+                            <div class="selector-grid">
+                                <div class="selector-btn active" data-value="Bemutatkozó oldal">Bemutatkozó oldal</div>
+                                <div class="selector-btn" data-value="Webshop">Webshop</div>
+                                <div class="selector-btn" data-value="Landing page">Landing page</div>
+                                <div class="selector-btn" data-value="Admin Dashboard">Admin Dashboard</div>
+                                <div class="selector-btn" style="flex-basis: 100%;" data-value="Egyéb / Egyedi">Egyéb / Egyedi</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group selector-group">
+                            <label>Tervezett költségkeret a projektre</label>
+                            <input type="hidden" name="Koltsegkeret">
+                            <div class="selector-grid">
+                                <div class="selector-btn active" data-value="25.000 - 50.000 Ft">25.000 - 50.000 Ft</div>
+                                <div class="selector-btn" data-value="50.000 - 100.000 Ft">50.000 - 100.000 Ft</div>
+                                <div class="selector-btn" data-value="100.000 Ft felett">100.000 Ft felett</div>
+                                <div class="selector-btn" style="flex-basis: 100%;" data-value="Egyéb / Egyedi">Egyéb / Egyedi</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Projekt rövid leírása *</label>
+                            <textarea name="Uzenet" class="form-control" placeholder="Meséljen a céljairól..." required></textarea>
+                        </div>
+
+                        <div class="gdpr-check">
+                            <input type="checkbox" required id="gdpr">
+                            <label for="gdpr">Elfogadom az <a href="#">Adatvédelmi tájékoztatót</a>, és hozzájárulok az adataim kezeléséhez.</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-block">Ajánlatkérés elküldése</button>
+                    </form>
+                </div>
+
+                <div id="premium-success-overlay">
+                    <div class="premium-card">
+                        <svg class="animated-check" viewBox="0 0 130.2 130.2">
+                            <circle class="path circle" fill="none" stroke="#3b82f6" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                            <path class="path check" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10" d="M100.2 40.2L51.5 88.8 29.8 67.5"/>
+                        </svg>
+                        <h2 class="premium-title">Ajánlatkérés Célba Ért!</h2>
+                        <p class="premium-text">A rendszerünk feldolgozta az adatokat. Hamarosan jelentkezünk a részletekkel a megadott e-mail címen.</p>
+                        <button class="premium-close-btn" onclick="closePremiumSuccess()">Rendben, köszi!</button>
+                    </div>
+                </div>
+
+                <div class="info-side slide-in-right">
+                    <h3 style="margin-bottom: 20px; font-size: 20px;">Elérhetőségek</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 15px;">Ha kérdése van, keressen bizalommal az alábbi elérhetőségeken.</p>
+                    <p style="margin-bottom: 10px;"><strong>Email:</strong> <span style="color: var(--primary);">luminaweb.official@gmail.com</span></p>
+                    <p><strong>Telefon:</strong> +36 30 108 7050</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo"><a href="index.html#kezdolap">LuminaWeb</a></div>
+            <p>&copy; 2026 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+<div id="pro-cookie-banner">
+    <div class="cookie-banner-content">
+        <div class="cookie-text">
+            <strong>Sütiket (cookie) használunk 🍪</strong>
+            Személyre szabott élményt, célzott hirdetéseket és analitikát biztosítunk a sütik segítségével. <a href="adatvedelem.html">Adatvédelem</a>.
+        </div>
+        <div class="cookie-actions">
+            <button onclick="acceptAllCookies()" class="btn-primary">Mindent elfogad</button>
+            <button onclick="rejectAllCookies()" class="btn-outline">Csak kötelezők</button>
+            <button onclick="openCookieSettings()" class="btn-text"><i class="fas fa-cog"></i> Testreszabás</button>
+        </div>
+    </div>
+</div>
+
+<div class="admin-modal" id="cookie-settings-modal" style="z-index: 999999;">
+    <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-header" style="border-bottom: 1px solid var(--admin-border);">
+            Süti (Cookie) Beállítások
+            <button class="modal-close" onclick="closeCookieSettings()">&times;</button>
+        </div>
+        <div class="modal-body" style="padding: 20px 25px;">
+            <p style="color: var(--admin-muted); font-size: 13px; margin-bottom: 20px;">
+                Itt testreszabhatod, milyen típusú adatgyűjtést engedélyezel számunkra. Az alapműködéshez szükséges sütiket nem lehet kikapcsolni.
+            </p>
+
+            <div class="cookie-category-row">
+                <div class="cookie-cat-info">
+                    <h4>Alapműködéshez szükséges</h4>
+                    <p>Ezek nélkül a weboldal, az űrlapok és a bejelentkezés nem működne biztonságosan.</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider round disabled"></span>
+                </label>
+            </div>
+
+            <div class="cookie-category-row">
+                <div class="cookie-cat-info">
+                    <h4>Statisztika és Analitika</h4>
+                    <p>Segít megérteni, hogyan használják a látogatók az oldalt (pl. Google Analytics). Névtelen adatokat gyűjt.</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-analytics">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="cookie-category-row">
+                <div class="cookie-cat-info">
+                    <h4>Marketing és Hirdetés</h4>
+                    <p>Célzott hirdetések megjelenítéséhez és a kampányaink méréséhez használjuk (pl. Facebook Pixel).</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-marketing">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <button onclick="saveCookiePreferences()" class="btn-primary" style="width: 100%; margin-top: 20px;">Beállítások mentése</button>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+<script>
+        const contactForm = document.getElementById("myContactForm");
+        
+        if(contactForm) {
+            contactForm.addEventListener("submit", function(event) {
+                event.preventDefault(); // Megakadályozza az alapértelmezett Formspree oldalt
+                
+                var form = event.target;
+                var data = new FormData(form);
+                var submitBtn = form.querySelector('button[type="submit"]');
+                
+                // Gomb állapota küldés közben
+                var originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Küldés...';
+                submitBtn.style.opacity = "0.7";
+                submitBtn.disabled = true;
+
+                // Adatok küldése
+                fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // SIKERES KÜLDÉS: Átirányítás a köszönjük oldalra
+                        window.location.href = "koszonjuk.html";
+                    } else {
+                        alert("Hiba történt az elküldés során. Kérjük, próbálja újra!");
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.style.opacity = "1";
+                        submitBtn.disabled = false;
+                    }
+                }).catch(error => {
+                    alert("Hálózati hiba történt. Kérjük, ellenőrizze az internetkapcsolatot!");
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+    </script>
+</body>
+</html>

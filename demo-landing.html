@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | SaaS Landing Demó</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-bar">Élő SaaS Landing Demó <a href="index.html">← Vissza a portfólióhoz</a></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><a href="demo-landing.html">Task<span>Flow</span></a></div>
+            
+            <div class="nav-links">
+                <a href="demo-landing-features.html" class="menu-link">Funkciók</a>
+                <a href="demo-landing-pricing.html" class="menu-link">Árak</a>
+                <a href="demo-landing-about.html" class="menu-link">Rólunk</a>
+                
+                <div style="width: 1px; height: 20px; background: var(--saas-border); margin: 0 10px;"></div>
+                
+                <button onclick="openModal('login')" class="login-btn">Bejelentkezés</button>
+                <button onclick="openModal('register')" class="btn-primary" style="padding: 10px 20px;">Próbáld ki ingyen</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-wrapper">
+        <div class="hero-glow"></div> <div class="hero">
+            <div class="hero-text">
+                <div class="badge"><i class="fas fa-sparkles"></i> V2.0 Megjelent - Új AI Funkciók</div>
+                <h1>A munkafolyamatok automatizálása, okosabban.</h1>
+                <p>Spórolj heti 15 órát a csapatodnak. A TaskFlow AI alapú rendszere helyetted végzi el a repetitív adminisztrációs feladatokat.</p>
+                <div class="hero-buttons">
+                    <button onclick="openModal('register')" class="btn-primary">Kezdd el ingyen</button>
+                    <button onclick="openModal('demo')" class="btn-outline"><i class="fas fa-play" style="font-size: 12px; margin-right: 8px;"></i> Demó kérése</button>
+                </div>
+                <p style="font-size: 13px; margin-top: 15px; color: var(--saas-muted);">Nincs szükség bankkártyára. 14 napos ingyenes próba.</p>
+            </div>
+            
+            <div class="hero-img-container">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" class="hero-img" alt="Szoftver Dashboard Mockup">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">Bejelentkezés</h2>
+                <p id="modalDesc">Jelentkezz be a folytatáshoz.</p>
+            </div>
+
+            <button class="btn-google" id="modalGoogleBtn">
+                <i class="fab fa-google" style="color: #ea4335; font-size: 16px;"></i> Folytatás Google fiókkal
+            </button>
+            
+            <div class="divider" id="modalDivider">vagy email címmel</div>
+
+            <div id="nameGroup" class="form-group" style="display: none;">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Teljes név">
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email cím">
+            </div>
+            
+            <div id="passwordGroup">
+                <div class="form-group" style="margin-bottom: 8px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Jelszó">
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" onclick="openModal('forgot')" style="color: var(--saas-primary); font-size: 12px; font-weight: 600; text-decoration: none;">Elfelejtetted a jelszavad?</a>
+                </div>
+            </div>
+            
+            <button id="modalSubmitBtn" class="btn-primary" style="width: 100%;" onclick="submitForm()">Tovább</button>
+
+            <div class="modal-footer" id="modalFooter">
+                Nincs még fiókod? <a onclick="openModal('register')">Regisztrálj!</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="saas-toast"></div>
+    <script src="landing.js"></script>
+</body>
+</html>

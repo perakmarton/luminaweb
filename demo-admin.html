@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Vezérlőpult | Admin Demó</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő B2B CMS / Admin Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+<div class="sidebar">
+        <div class="sidebar-logo">Lumina<span>Admin</span></div>
+        <div class="sidebar-menu">
+            <a href="demo-admin.html" class="menu-item"><i class="fas fa-chart-pie"></i> <span>Vezérlőpult</span></a>
+            <a href="demo-admin-orders.html" class="menu-item"><i class="fas fa-shopping-cart"></i> <span>Rendelések</span></a>
+            <a href="demo-admin-customers.html" class="menu-item"><i class="fas fa-users"></i> <span>Ügyfelek</span></a>
+            <a href="demo-admin-products.html" class="menu-item"><i class="fas fa-box"></i> <span>Termékek</span></a>
+            <a href="demo-admin-restock.html" class="menu-item"><i class="fas fa-truck-loading"></i> <span>Berendelés</span></a>
+            
+            <div style="flex-grow: 1;"></div>
+            
+            <a href="demo-admin-settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>Beállítások</span></a>
+            <a href="index.html" class="menu-item" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> <span>Kijelentkezés</span></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-header">
+            <h2 class="page-title">Műszerfal Áttekintés</h2>
+<div class="header-actions">
+    <div class="profile-menu-container">
+        <div class="admin-profile" onclick="toggleProfileMenu()">
+            <span>Kiss Péter</span>
+            <img src="https://ui-avatars.com/api/?name=Kiss+Peter&background=3b82f6&color=fff" alt="Admin">
+            <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px; color: var(--admin-muted);"></i>
+        </div>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+                <strong>Kiss Péter</strong>
+                <p>admin@pelda.hu</p>
+            </div>
+            <hr>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-user-circle"></i> Fiókom
+            </a>
+            <a href="demo-admin-settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Beállítások
+            </a>
+            <div class="dropdown-item" onclick="toggleAdminTheme()">
+                <i id="dropdown-theme-icon" class="fas fa-moon"></i> Éjszakai Mód 
+                <span id="dropdown-theme-text" style="margin-left:auto; font-size:12px; color:var(--admin-muted); font-weight:700;">Ki</span>
+            </div>
+            <hr>
+            <a href="index.html" class="dropdown-item text-danger">
+                <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div class="content-pad">
+            <div class="grid-4">
+                <div class="stat-card"><div class="stat-card-title">Havi Bevétel</div><div class="stat-card-value">1 245 000 Ft</div><div class="trend-up"><i class="fas fa-arrow-up"></i> +14.5%</div></div>
+                <div class="stat-card"><div class="stat-card-title">Aktív Rendelések</div><div class="stat-card-value">18 db</div><div class="trend-up"><i class="fas fa-arrow-up"></i> +5.2%</div></div>
+                <div class="stat-card"><div class="stat-card-title">Új Ügyfelek</div><div class="stat-card-value">42</div><div class="trend-up"><i class="fas fa-arrow-up"></i> +12.0%</div></div>
+                <div class="stat-card"><div class="stat-card-title">Készlethiányos</div><div class="stat-card-value">2 termék</div><div class="trend-down"><i class="fas fa-exclamation-triangle"></i> Intézkedés javasolt</div></div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-header"><span>Legutóbbi Rendelések</span><a href="demo-admin-orders.html">Összes megtekintése &rarr;</a></div>
+                <table class="admin-table">
+                    <thead><tr><th>ID</th><th>Ügyfél</th><th>Összeg</th><th>Státusz</th></tr></thead>
+                    <tbody>
+                        <tr><td>#ORD-8924</td><td>Nagy Anna</td><td>45 990 Ft</td><td><span class="status-badge status-success">Fizetve</span></td></tr>
+                        <tr><td>#ORD-8923</td><td>Kovács Zoltán</td><td>12 500 Ft</td><td><span class="status-badge status-pending">Feldolgozás alatt</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

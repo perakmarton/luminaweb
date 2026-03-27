@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Kosár | Webshop Demó</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        
+        <div class="nav-actions">
+            <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon">
+                <i class="fas fa-shopping-bag" style="font-size: 18px;"></i>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title" style="margin-bottom: 50px;">Kosár</h1>
+        
+        <div class="grid-cart">
+            <div>
+                <div class="cart-header">
+                    <div>Termék</div>
+                    <div>Mennyiség</div>
+                    <div>Összesen</div>
+                    <div></div>
+                </div>
+                <div id="cart-items-container">
+                    </div>
+            </div>
+
+            <div id="checkout-btn-container">
+                <div class="cart-summary">
+                    <h2 style="margin-top:0; border-bottom: 1px solid var(--shop-border); padding-bottom: 15px;">Összegzés</h2>
+                    <div style="display:flex; justify-content:space-between; margin: 20px 0; font-size: 16px;">
+                        <span>Részösszeg</span>
+                        <span id="cart-total-price" style="font-weight: 600;">0 Ft</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin: 20px 0; font-size: 16px;">
+                        <span>Szállítás</span>
+                        <span style="color: #10b981; font-weight: 600;">Ingyenes</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--shop-muted); margin-bottom: 30px;">A végleges adók és kedvezmények a pénztár oldalon kerülnek kiszámításra.</p>
+                    
+                    <a href="demo-checkout.html" class="btn-dark" style="padding: 18px;">Tovább a pénztárhoz</a>
+                    
+                    <a href="demo-webshop.html" style="display: block; text-align: center; margin-top: 20px; font-weight: 600; color: var(--shop-muted); font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='var(--shop-blue)'" onmouseout="this.style.color='var(--shop-muted)'">
+                        &larr; Vissza a vásárláshoz
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="shop.js"></script>
+</body>
+</html>

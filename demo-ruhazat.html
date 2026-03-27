@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Ruházat | Webshop Demó</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-return-bar">Ez egy működő Prémium E-commerce Demó. <a href="index.html">← Vissza a portfólióhoz</a></div>
+
+    <div class="navbar">
+        <a href="demo-webshop.html" class="logo">LUXE.</a>
+        <div class="nav-links">
+            <a href="demo-webshop.html">Minden Termék</a>
+            <a href="demo-ruhazat.html" class="active">Ruházat</a>
+            <a href="demo-kiegeszitok.html">Kiegészítők</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle-btn" class="theme-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="demo-cart.html" class="cart-icon">
+                <i class="fas fa-shopping-bag" style="font-size: 18px;"></i>
+                <span class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 40px;">
+        <h2 class="section-title">Ruházat</h2>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(1, 'Premium Pamut Póló', 8990, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Premium Pamut Póló</h3>
+                <p class="product-price">8 990 Ft</p>
+            </div>
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(2, 'Bőrkabát Classic', 45990, 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Bőrkabát Classic</h3>
+                <p class="product-price">45 990 Ft</p>
+            </div>
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600" class="product-img">
+                    <div class="add-to-cart-overlay" onclick="addToCart(5, 'Minimalista Sneaker', 42990, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600')">+ Kosárba teszem</div>
+                </div>
+                <h3 class="product-title">Minimalista Sneaker</h3>
+                <p class="product-price">42 990 Ft</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <script src="shop.js"></script>
+</body>
+</html>

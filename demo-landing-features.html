@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funkciók | SaaS Landing Demó</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-bar">Élő SaaS Landing Demó <a href="index.html">← Vissza a portfólióhoz</a></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><a href="demo-landing.html">Task<span>Flow</span></a></div>
+            <div class="nav-links">
+                <a href="demo-landing-features.html" class="menu-link">Funkciók</a>
+                <a href="demo-landing-pricing.html" class="menu-link">Árak</a>
+                <a href="demo-landing-about.html" class="menu-link">Rólunk</a>
+                <div style="width: 1px; height: 20px; background: var(--saas-border); margin: 0 10px;"></div>
+                <button onclick="openModal('login')" class="login-btn">Bejelentkezés</button>
+                <button onclick="openModal('register')" class="btn-primary" style="padding: 10px 20px;">Próbáld ki ingyen</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-glow"></div>
+
+    <div class="page-header">
+        <h1>Minden eszköz egy helyen</h1>
+        <p>A TaskFlow nem csak egy feladatkezelő. Egy komplett AI asszisztens, ami segít a csapatodnak fókuszálni a lényegre, miközben az ismétlődő folyamatokat automatizálja.</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-robot"></i></div>
+            <h3>AI Automatizáció</h3>
+            <p>Hozd létre a szabályokat, és hagyd, hogy a mesterséges intelligencia delegálja a feladatokat és frissítse a státuszokat helyetted.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Valós idejű Analitika</h3>
+            <p>Lásd át másodpercek alatt a projektjeid állását. Testreszabható dashboardok és exportálható riportok egy kattintással.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-users"></i></div>
+            <h3>Csapat Kollaboráció</h3>
+            <p>Belső chat, fájlmegosztás és kommentezés közvetlenül a feladatokon belül. Vége a végtelen e-mail láncoknak.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-lock"></i></div>
+            <h3>Nagyvállalati Biztonság</h3>
+            <p>Végpontok közötti titkosítás, 2FA hitelesítés és GDPR megfelelőség biztosítja az adataid maximális védelmét.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">Bejelentkezés</h2>
+                <p id="modalDesc">Jelentkezz be a folytatáshoz.</p>
+            </div>
+
+            <button class="btn-google" id="modalGoogleBtn">
+                <i class="fab fa-google" style="color: #ea4335; font-size: 16px;"></i> Folytatás Google fiókkal
+            </button>
+            
+            <div class="divider" id="modalDivider">vagy email címmel</div>
+
+            <div id="nameGroup" class="form-group" style="display: none;">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Teljes név">
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email cím">
+            </div>
+            
+            <div id="passwordGroup">
+                <div class="form-group" style="margin-bottom: 8px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Jelszó">
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" onclick="openModal('forgot')" style="color: var(--saas-primary); font-size: 12px; font-weight: 600; text-decoration: none;">Elfelejtetted a jelszavad?</a>
+                </div>
+            </div>
+            
+            <button id="modalSubmitBtn" class="btn-primary" style="width: 100%;" onclick="submitForm()">Tovább</button>
+
+            <div class="modal-footer" id="modalFooter">
+                Nincs még fiókod? <a onclick="openModal('register')">Regisztrálj!</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="saas-toast"></div>
+    <script src="landing.js"></script>
+</body>
+</html>
